@@ -1,0 +1,152 @@
+/* --- GLOBAL STYLES --- */
+:root {
+  /* We define our color palette here based on your Figma design */
+  --bg-color: #e6cd98; /* Parchment base color */
+  --text-color: #201d18;
+  --red-line: #752b20;
+  --hero-band: #6b6e3faa; /* Mossfere*/
+  --card-bg: #ae7f37aa; /* Slightly darker than background */
+  --btn-bg: #3a2522; /* Dark brown button */
+  --footer-bg: #804a3e; /* Brown footer */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Special Elite", cursive;
+  color: var(--text-color);
+
+  /* Imagen de fondo */
+  background-image: url("Images/BackgroundPaper.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+
+  /* Color sólido de respaldo */
+  background-color: #e9d6ab;
+}
+
+/* --- 1. HEADER --- */
+
+.icono-pluma {
+  width: 120px;
+  margin-bottom: -15px; /* para alinear la linea roja y la pluma */
+}
+
+header {
+  display: flex;
+  justify-content: space-between; /* alinea los nav*/
+  align-items: flex-end;
+  padding: 20px 20px -10px 70px;
+  border-bottom: 5px solid var(--red-line); /* The red dividing line */
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo h1 {
+  font-size: 1.5rem;
+  line-height: 1.1;
+  letter-spacing: 2px;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-weight: bold;
+}
+
+nav a {
+  text-decoration: none;
+  color: var(--text-color);
+  font-size: 1.1rem;
+}
+
+/* --- 2. HERO SECTION --- */
+.hero {
+  background-color: var(--hero-band);
+  text-align: center;
+  padding: 50px 20px;
+  margin-top: 40px; /* Space between red line and green band */
+}
+
+.hero h2 {
+  font-size: 1.4rem;
+  margin-bottom: 25px;
+  font-weight: normal;
+}
+
+.btn {
+  display: inline-block;
+  background-color: var(--btn-bg);
+  color: white;
+  padding: 10px 25px;
+  text-decoration: none;
+  border-radius: 8px; /* Rounded corners */
+  font-size: 1rem;
+}
+
+/* --- 3. FEATURES SECTION --- */
+.features {
+  display: flex;
+  justify-content: center;
+  gap: 40px; /* Space between the cards */
+  padding: 60px 20px;
+}
+
+.card {
+  background-color: var(--card-bg);
+  padding: 30px 20px;
+  border-radius: 12px;
+  width: 250px;
+  text-align: center;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.card-icon {
+  font-size: 3rem;
+  background-color: #c9a363; /* Inner box for the icon */
+  border: 2px solid #8e6c40;
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 20px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card p {
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+/* --- 4. FOOTER --- */
+footer {
+  background-color: var(--footer-bg);
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  padding: 30px 60px;
+  margin-top: 20px;
+}
+
+.footer-column h3 {
+  font-size: 1rem;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #ffffff55;
+  padding-bottom: 5px;
+  display: inline-block;
+}
+
+.footer-column p {
+  font-size: 0.85rem;
+  margin-bottom: 5px;
+}
