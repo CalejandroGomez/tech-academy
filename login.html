@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Iniciar sesión - Tech Academy</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="loginStyle.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet" />
+</head>
+
+<body class="pagina-login">
+  <header>
+    <div class="logo">
+      <img src="Images/Logo.png" alt="Logo Tech Academy" class="icono-pluma" />
+      <div class="logo-text">
+        <h1>TECH</h1>
+        <h1>ACADEMY</h1>
+      </div>
+    </div>
+
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="index.html#programas">Programas</a>
+      <a href="index.html#contacto">Contacto</a>
+      <a href="login.html">Ingresar</a>
+      <img src="Images/UserShield.png" alt="User Icon" class="user-icon" />
+    </nav>
+  </header>
+
+  <main class="contenido-login">
+    <div class="decoracion-login">
+      <img src="Images/estudianteM.png" alt="Maga aprendiz" class="estudianteMujer" />
+    </div>
+
+    <section class="tarjeta-login">
+      <form class="formulario-login" id="formularioLogin">
+        <div class="grupo-campo">
+          <label for="usuario">Usuario</label>
+          <div class="campo-login">
+            <input type="text" id="usuario" name="usuario" autocomplete="username" required />
+            <span class="icono-input">♟</span>
+          </div>
+        </div>
+
+        <div class="grupo-campo">
+          <label for="contrasena">Contraseña</label>
+          <div class="campo-login">
+            <input type="password" id="contrasena" name="contrasena" autocomplete="current-password" required />
+            <span class="icono-input">🔑</span>
+          </div>
+        </div>
+
+        <p id="mensajeLogin" class="mensaje-login"></p>
+
+        <button type="submit" class="boton-login">Iniciar sesión</button>
+
+        <a href="registro.html" class="enlace-login">Registrarse</a>
+        <a href="#" class="enlace-login">¿Olvidó la contraseña?</a>
+      </form>
+    </section>
+
+    <div class="decoracion-login">
+      <img src="Images/Antorcha.png" alt="Antorcha decorativa" class="imagen-antorcha" />
+    </div>
+  </main>
+</body>
+</html>

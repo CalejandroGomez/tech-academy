@@ -1,0 +1,153 @@
+.pagina-login {
+  min-height: 100vh;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.contenido-login {
+  flex: 1;
+  min-height: 520px;
+  display: grid;
+  grid-template-columns: 1fr 340px 1fr;
+  align-items: center;
+  padding: 30px 20px 0;
+  gap: 20px;
+}
+
+.tarjeta-login {
+  width: 340px;
+  max-width: 100%;
+  padding: 40px 45px;
+  border-radius: 40px;
+  background-color: var(--card-bg);
+  box-shadow: 3px 6px 20px rgba(0, 0, 0, 0.15);
+  z-index: 2;
+}
+
+.formulario-login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.grupo-campo {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.grupo-campo label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.campo-login {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.campo-login input {
+  width: 100%;
+  height: 38px;
+  padding: 8px 38px 8px 12px;
+  border: none;
+  border-radius: 6px;
+  background-color: #9fc79d;
+  color: var(--text-color);
+  font-family: "Special Elite", cursive;
+  font-size: 1rem;
+  transition: outline 0.2s;
+}
+
+.campo-login input:focus {
+  outline: 2px solid var(--red-line);
+}
+
+.icono-input {
+  position: absolute;
+  right: 10px;
+  font-size: 1.1rem;
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+.boton-login {
+  margin-top: 10px;
+  margin-bottom: 15px;
+  padding: 9px 24px;
+  border: none;
+  border-radius: 10px;
+  background-color: var(--red-line);
+  color: white;
+  font-family: "Special Elite", cursive;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.boton-login:hover {
+  background-color: #521c15;
+  transform: scale(1.02);
+}
+
+.boton-login:active {
+  transform: scale(0.98);
+}
+
+.enlace-login {
+  margin-bottom: 8px;
+  color: var(--text-color);
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: color 0.2s, text-decoration 0.2s;
+}
+
+.enlace-login:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  color: var(--red-line);
+}
+
+.decoracion-login {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  height: 100%;
+}
+
+.estudianteMujer {
+  width: 480px;
+  max-width: 100%;
+  height: auto;
+  align-self: flex-end;
+}
+
+.imagen-antorcha {
+  width: 200px;
+  max-width: 100%;
+  height: auto;
+  align-self: center;
+}
+
+.mensaje-login {
+  min-height: 20px;
+  color: #8b0000;
+  font-size: 0.85rem;
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+@media (max-width: 900px) {
+  .contenido-login {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    padding: 20px 15px;
+  }
+
+  .decoracion-login {
+    display: none;
+  }
+}

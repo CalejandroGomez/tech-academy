@@ -1,64 +1,59 @@
 <!doctype html>
-<html lang="en">
-
+<html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tech Academy</title>
   <link rel="stylesheet" href="style.css" />
-
-  <!--Importa la tipografia Special Elite-->
   <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet" />
 </head>
 
 <body>
-  <!--Encabezado-->
   <header>
     <div class="logo">
-      <img src="Images/Logo.png" alt="" class="icono-pluma" />
+      <img src="Images/Logo.png" alt="Logo Tech Academy" class="icono-pluma" />
       <div class="logo-text">
         <h1>TECH</h1>
         <h1>ACADEMY</h1>
       </div>
     </div>
     <nav>
-      <a href="#">Inicio</a>
-      <a href="#">Programa</a>
-      <a href="#">Contacto</a>
-      <a href="#">Ingresar</a>
+      <a href="index.html">Inicio</a>
+      <a href="#programas">Programa</a>
+      <a href="#contacto">Contacto</a>
+      <a href="login.html" id="link-ingresar">Ingresar</a>
       <img src="Images/UserShield.png" alt="User Icon" class="user-icon" />
     </nav>
   </header>
 
   <main>
-    <!-- Sección 1-->
     <section class="hero">
       <h2>"La forja de tu destino profesional comienza con este paso"</h2>
-      <a href="#" class="btn">Explora nuestro catálogo de saberes</a>
+      <a href="#programas" class="btn" id="btn-explorar">Explora nuestro catálogo de saberes</a>
     </section>
 
-    <!-- Sección 2-->
-    <section class="features">
-      <div class="card">
+    <section class="features" id="programas">
+      <div class="card" data-id="1">
         <div>
-          <img src="Images/papyroIcon.svg" style="size: 50" />
+          <img src="Images/papyroIcon.svg" style="size: 50" alt="Arquitectura de código" />
         </div>
         <p>Arquitectura y Creación<br />de Código</p>
       </div>
-      <div class="card">
-        <img src="Images/gearIcon.png" style="size: 25" />
+      <div class="card" data-id="2">
+        <img src="Images/gearIcon.png" style="size: 25" alt="Restauración de computadores" />
         <p>Restauración de computadores</p>
       </div>
-      <div class="card">
+      <div class="card" data-id="3">
         <div>
-          <img src="Images/cloudIcon.svg" alt="" />
+          <img src="Images/cloudIcon.svg" alt="Soluciones cloud" />
         </div>
         <p>Diseño de soluciones<br />cloud</p>
       </div>
     </section>
 
-    <!--  FOOTER -->
-    <footer>
+    <section id="detalle-programa"></section>
+
+    <footer id="contacto">
       <div class="footer-column">
         <h3>Información de contacto</h3>
         <p>Sede principal: Rionegro, Antioquia</p>
@@ -73,5 +68,4 @@
   </main>
   <script src="app.js"></script>
 </body>
-
 </html>
