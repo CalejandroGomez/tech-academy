@@ -1,0 +1,17 @@
+# Carpetas privadas / locales
+curso/
+*.md
+# Dependencias y compilación (por si se agregan herramientas en el futuro)
+node_modules/
+dist/
+.env
+.env.*
+
+# Editores e IDEs
+.vscode/
+.idea/
+
+# Archivos del sistema operativo
+.DS_Store
+Thumbs.db
+Desktop.ini
