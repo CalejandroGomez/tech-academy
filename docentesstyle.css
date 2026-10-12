@@ -1,0 +1,160 @@
+
+:root {
+  --fondo-pergamino: #f4ecd8;
+  --marron-oscuro: #4a3319;
+  --card-bg: #e6cd98;
+  --tabla-bg: rgba(230, 205, 152, 0.85);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Special Elite', cursive;
+  background-image: url('Images/BackgroundPaper.png');
+  background-size: cover;
+  background-attachment: fixed;
+  color: var(--marron-oscuro);
+  min-height: 100vh;
+}
+
+/* NAVBAR / ENCABEZADO */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 40px;
+  background-color: var(--card-bg);
+  border-bottom: 4px solid var(--marron-oscuro);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.icono-pluma {
+  width: 50px;
+  height: auto;
+}
+
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+nav a {
+  text-decoration: none;
+  color: var(--marron-oscuro);
+  font-weight: bold;
+}
+
+nav .user-icon {
+  width: 35px;
+}
+
+/* DISTRIBUCIÓN DE LA PÁGINA (GRID) */
+.contenido-docente {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 30px;
+  padding: 40px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.docente-imagen {
+  align-self: end;
+  margin-top: auto;
+  line-height: 0;
+}
+
+.docente-imagen img {
+  width: 100%;
+  max-width: 280px;
+  display: block;
+  margin-bottom: -43px; 
+}
+
+
+.tarjeta-modulo, .tabla-contenedor {
+  background-color: var(--card-bg);
+  border: 2px solid var(--marron-oscuro);
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.15);
+  margin-bottom: 25px;
+}
+
+/* FORMULARIO DE ENTRADA DE DATOS */
+.formulario-registro h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+}
+
+.formulario-registro form {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.formulario-registro input {
+  padding: 8px;
+  border: 2px solid var(--marron-oscuro);
+  border-radius: 6px;
+  font-family: 'Special Elite', cursive;
+  background-color: #fcf8f0;
+  color: var(--marron-oscuro);
+  width: 140px;
+}
+
+#nuevo-nombre {
+  width: 220px;
+}
+
+/* TABLA DE CALIFICACIONES */
+.fila-docente {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.3fr 1fr; /* Tus 5 columnas del HTML */
+  align-items: center;
+  text-align: center;
+  border-bottom: 2px solid rgba(74, 51, 25, 0.3);
+}
+
+.encabezado-tabla-docente {
+  font-size: 1.15rem;
+  font-weight: bold;
+  border-bottom: 3px solid var(--marron-oscuro);
+}
+
+.fila-docente span {
+  padding: 12px 6px;
+}
+
+/* BOTONES*/
+.btn-añadir, .boton-guardar {
+  padding: 6px 15px;
+  border: 2px solid var(--marron-oscuro);
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: 'Special Elite', cursive;
+  font-size: 0.95rem;
+  background-color: var(--marron-oscuro);
+  color: var(--fondo-pergamino);
+}
+
+.btn-añadir:hover, .boton-guardar:hover {
+  background-color: #6e4a24; /* Color café más claro al pasar el mouse */
+}
+
+/* Separación exclusiva para el botón de abajo (Cerrar sesión) */
+.boton-guardar {
+  margin-top: 20px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto; /* centrar debajo de la tabla */
+}

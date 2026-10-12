@@ -36,11 +36,7 @@ header {
   height: auto;
 }
 
-.logo-text h1 {
-  margin: 0;
-  font-size: 1.2rem;
-  line-height: 1;
-}
+
 
 nav {
   display: flex;

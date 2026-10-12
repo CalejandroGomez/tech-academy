@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Panel Docente - Tech Academy</title>
+
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="docentesstyle.css" />
+
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body class="pagina-docente">
+    <!-- ENCABEZADO -->
+    <header>
+       <div class="logo">
+       <img src="Images/Logo.png" alt="Logo Tech Academy" class="icono-pluma" />
+          <h1>TECH</h1>
+          <h1>ACADEMY</h1>
+        </div>
+      </div>
+      <nav>
+        <a href="index.html"> Inicio </a>
+        <a href="index.html#programas"> Programas </a>
+        <a href="index.html#contacto"> Contacto </a>
+        <a href="login.html"> Salir </a>
+        <img src="Images/UserShield.png" alt="Usuario" class="user-icon" />
+      </nav>
+    </header>
+     
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="contenido-docente">
+      <!-- Imagen lateral -->
+      <aside class="docente-imagen">
+        <img src="Images/docente.png" />
+      </aside>
+
+      <!-- Panel principal -->
+      <section class="tabla-docente">
+     
+        <div class="formulario-registro tarjeta-modulo">
+          <h3> Registrar Calificaciones por Fecha</h3>
+          <form id="form-docente">
+            <input type="text" id="nuevo-nombre" placeholder="Nombre Alumno" required />
+            <input type="text" id="nueva-nota2" placeholder="Nota 2" required />
+            <input type="text" id="nueva-nota3" placeholder="Nota 3" required />
+            
+           
+            <input type="date" id="nueva-fecha" value="2026-10-12" required />
+            
+            <button type="submit" class="btn-añadir">Añadir</button>
+          </form>
+        </div>
+
+        <div id="listaEstudiantes"></div>
+
+        <button class="boton-guardar" onclick="cerrarSesion()">
+          Cerrar sesión
+        </button>
+      </section>
+    </main>
+    <script src="docentes.js"></script>
+ 
+  </body>
+</html>
