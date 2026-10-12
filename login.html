@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <!-- Configuración de caracteres y vista para dispositivos móviles -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Iniciar sesión - Tech Academy</title>
+  
+  <!-- Enlaces a los archivos de estilos (CSS) -->
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="loginStyle.css" />
+  
+  <!-- Fuente importada de Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet" />
+</head>
+
+<!-- La clase 'pagina-login' en el body controla la altura fija y oculta el scroll -->
+<body class="pagina-login">
+
+  <!-- Encabezado superior de navegación -->
+  <header>
+    <div class="logo">
+      <img src="Images/Logo.png" alt="Logo Tech Academy" class="icono-pluma" />
+      <div class="logo-text">
+        <h3>TECH</h3>
+        <h3>ACADEMY</h3>
+      </div>
+    </div>
+
+    <!-- Menú de navegación principal -->
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="index.html#programas">Programas</a>
+      <a href="index.html#contacto">Contacto</a>
+      <a href="login.html">Ingresar</a>
+      <img src="Images/UserShield.png" alt="User Icon" class="user-icon" />
+    </nav>
+  </header>
+
+  <!-- Contenedor principal del Login (Grid de 3 columnas) -->
+  <main class="contenido-login">
+    
+    <!-- Columna 1: Imagen decorativa de la estudiante -->
+    <div class="decoracion-login">
+      <img src="Images/estudianteM.png" alt="Maga aprendiz" class="estudianteMujer" />
+    </div>
+
+    <!-- Columna 2: Tarjeta central con el formulario -->
+    <section class="tarjeta-login">
+      <!-- Formulario capturado por JavaScript mediante el ID 'formularioLogin' -->
+      <form class="formulario-login" id="formularioLogin">
+        
+        <!-- Campo: Usuario -->
+        <div class="grupo-campo">
+          <label for="usuario">Usuario</label>
+          <div class="campo-login">
+            <input type="text" id="usuario" name="usuario" autocomplete="username" required />
+            <span class="icono-input">♟</span> <!-- Ícono de ajedrez integrado en el input -->
+          </div>
+        </div>
+
+        <!-- Campo: Contraseña -->
+        <div class="grupo-campo">
+          <label for="contrasena">Contraseña</label>
+          <div class="campo-login">
+            <input type="password" id="contrasena" name="contrasena" autocomplete="current-password" required />
+            <span class="icono-input">🔑</span> <!-- Ícono de llave integrado en el input -->
+          </div>
+        </div>
+
+        <!-- Espacio reservado para inyectar mensajes de error desde JavaScript -->
+        <p id="mensajeLogin" class="mensaje-login"></p>
+
+        <!-- Botón de envío que dispara el evento 'submit' en JS -->
+        <button type="submit" class="boton-login">Iniciar sesión</button>
+
+        <!-- Enlaces secundarios -->
+        <a href="registro.html" class="enlace-login">Registrarse</a>
+        <a href="#" class="enlace-login">¿Olvidó la contraseña?</a>
+      </form>
+    </section>
+
+    <!-- Columna 3: Imagen decorativa de la antorcha -->
+    <div class="decoracion-login">
+      <img src="Images/Antorcha.png" alt="Antorcha decorativa" class="imagen-antorcha" />
+    </div>
+  </main>
+
+  <!-- Conexión con el archivo JavaScript que manejará la lógica de autenticación -->
+  <script src="loginScript.js"></script>
+</body>
+</html>
