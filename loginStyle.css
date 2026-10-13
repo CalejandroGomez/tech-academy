@@ -34,7 +34,7 @@ header {
   width: 340px;
   max-width: 100%;
   padding: 40px 45px;
-  border-radius: 40px; /* Bordes redondeados */
+  border-radius: 40px;      /* Bordes redondeados */
   background-color: var(--card-bg); /* Variable de color de fondo (debe estar en style.css) */
   box-shadow: 3px 6px 20px rgba(0, 0, 0, 0.15); /* Sombra para dar efecto de elevación */
   z-index: 2; /* Asegura que el formulario esté por encima de las decoraciones */
