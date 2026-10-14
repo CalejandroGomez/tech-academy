@@ -64,7 +64,8 @@ tech-academy/
 ├── seguimiento.js           # CRUD de estudiantes y notas
 ├── docentes.html            # Vista alternativa del panel docente
 ├── docentesstyle.css        # Estilos del panel docente
-├── docentes.js              # Cierre de sesión del panel docente
+├── docentes.js              # CRUD de calificaciones de docentes y cierre de sesión
+├── SUSTENTACION_JAVASCRIPT.md # Guía para sustentar la lógica y el DOM de los scripts
 └── README.md                # Este archivo
 ```
 
