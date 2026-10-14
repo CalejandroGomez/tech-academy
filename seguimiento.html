@@ -1,131 +1,115 @@
 <!doctype html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Seguimiento académico - Tech Academy</title>
-   
-    <link rel="stylesheet" href="seguimientostyle.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet" />
-  </head>
 
-  <body class="pagina-seguimiento">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Seguimiento académico - Tech Academy</title>
 
-    <header>
-       <div class="logo">
-       <img src="Images/Logo.png" alt="Logo Tech Academy" class="icono-pluma" />
-          <h1>TECH</h1>
-          <h1>ACADEMY</h1>
-        </div>
+  <link rel="stylesheet" href="seguimientostyle.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet" />
+</head>
+
+<body class="pagina-seguimiento">
+
+  <header>
+    <div class="logo">
+      <img src="Images/Logo.png" alt="Logo Tech Academy" class="icono-pluma" />
+      <div class="logo-text">
+        <h1>TECH</h1>
+        <h1>ACADEMY</h1>
       </div>
-      <nav>
-        <a href="index.html"> Inicio </a>
-        <a href="index.html#programas"> Programas </a>
-        <a href="index.html#contacto"> Contacto </a>
-        <a href="login.html"> Salir </a>
-        <img src="Images/UserShield.png" alt="Usuario" class="user-icon" />
-      </nav>
-    </header>
+    </div>
+    <nav>
+      <a href="index.html"> Inicio </a>
+      <a href="index.html#programas"> Programas </a>
+      <a href="index.html#contacto"> Contacto </a>
+      <a class="enlace-panel" href="docentes.html">Registro de notas</a>
+      <a href="login.html"> Salir </a>
+      <img src="Images/UserShield.png" alt="Usuario" class="user-icon" />
+    </nav>
+  </header>
 
 
-    <main class="contenido-seguimiento">
-      <!--imagen docente--> 
-      <aside class="docente">
-        <img src="Images/docente.png" alt="Docente" />
-      </aside>
+  <main class="contenido-seguimiento">
+    <aside class="docente">
+      <img src="Images/docente.png" alt="Docente" />
+    </aside>
 
-      <!-- panel Académico : resumen de las estadisticas del salon de clases-->
-      <section class="panel-seguimiento">
+    <section class="panel-seguimiento">
 
-        <!-- información del curso -->
-        <div class="datos-curso">
-          <p>Materia: <strong> Metodologías Ágiles </strong></p>
+      <div class="datos-curso">
+        <p>Materia: <strong> Metodologías Ágiles </strong></p>
+      </div>
+
+      <section class="indicadores">
+        <div class="indicador">
+          <h3>PROM. CURSO</h3>
+          <strong> 78% </strong>
         </div>
 
-        <!-- INDICADORES -->
-        <section class="indicadores"> <!--promedio de notas-->
-          <div class="indicador">
-            <h3>PROM. CURSO</h3>
-            <strong> 78% </strong>
-          </div>
-
-          <div class="indicador"> <!--resumen: trabajos entregados-->
-            <h3>ESTADOS ENTREGA</h3>
-            <p>Entregados: 15</p>
-            <p>Pendientes: 5</p>
-            <p>En revisión: 3</p>
-          </div>
-
-          <div class="indicador"> <!--porcentaje de asistencia-->
-            <h3>ASISTENCIA GRAL.</h3>
-            <strong> 92% </strong>
-          </div>
-        </section>
-
-        <!-- Buscador de estudiantes -->
-        <div class="buscador-seguimiento">
-          <span>  </span>
-          <label for="buscar"> Buscar </label>
-          <input type="text" id="buscar" placeholder="Nombre del estudiante..." />
+        <div class="indicador">
+          <h3>ESTADOS ENTREGA</h3>
+          <p>Entregados: 15</p>
+          <p>Pendientes: 5</p>
+          <p>En revisión: 3</p>
         </div>
 
-        <!-- Formulario de registro de notas -->
-        <div class="formulario-registro tarjeta-modulo">
-          <h3>Registro de Calificaciones</h3>
-          <!--casillas para capturar la información-->
-          <form id="form-estudiante">
-            <input type="text" id="nuevo-nombre" placeholder="Nombre Estudiante" required />
-            
-            <select id="nuevo-estado">
-              <option value="Entregado">Entregado</option>
-              <option value="Pendiente">Pendiente</option>
-              <option value="En revisión">En revisión</option>
-            </select>
-            
-            <input type="text" id="nueva-nota" placeholder="Nota" required />
-            <input type="text" id="nueva-asistencia" placeholder="Asistencia" required />
-            
-            <button type="submit" class="btn-añadir">Añadir</button>
-          </form>
+        <div class="indicador">
+          <h3>ASISTENCIA GRAL.</h3>
+          <strong> 92% </strong>
         </div>
-         <p></p>
-        
-        <!-- Tabla de calificaciones -->
-        <section class="tabla-seguimiento">
-          <div class="fila tabla-encabezado">
-            <span> Nombre </span>
-            <span> Estado </span>
-            <span> Nota </span>
-            <span> Asistencia </span>
-          </div>
-          
-          <div id="contenedor-estudiantes">
-         
-          </div>
-        </section>
-
-        <button class="boton-guardar" id="btnGuardar">Guardar en LocalStorage</button>
       </section>
 
-      
-    </main>
+      <div class="buscador-seguimiento">
+        <span> </span>
+        <label for="buscar"> Buscar </label>
+        <input type="text" id="buscar" placeholder="Nombre del estudiante..." />
+      </div>
 
-    <!--footer-->
-<footer>
-        <div class="footer-column">
-          <h3>Información de contacto</h3>
-          <p>Sede principal: Rionegro, Antioquia</p>
-          <p>Teléfono de atención: (604) 555 0199</p>
-        </div>
-        <div class="footer-column">
-          <h3>Nuestras redes</h3>
-          <p>Facebook: /InstitucionTecnicaOriente</p>
-          <p>Instagram: @ITOriente_Academico</p>
-        </div>
-      </footer>
-  
-    <script src="seguimiento.js"></script>
+      <div class="formulario-registro tarjeta-modulo">
+        <h3>Registro de Calificaciones</h3>
+        <form id="form-estudiante">
+          <input type="text" id="nuevo-nombre" placeholder="Nombre Estudiante" required />
 
+          <select id="nuevo-estado">
+            <option value="Entregado">Entregado</option>
+            <option value="Pendiente">Pendiente</option>
+            <option value="En revisión">En revisión</option>
+          </select>
+
+          <input type="text" id="nueva-nota" placeholder="Nota" required />
+          <input type="text" id="nueva-asistencia" placeholder="Asistencia" required />
+
+          <button type="submit" class="btn-añadir" id="btn-submit-estudiante">Añadir</button>
+          <button type="button" class="btn-añadir" id="btn-cancelar-edicion" style="display: none; background-color: #6e4a24;">Cancelar</button>
+        </form>
+      </div>
+      <p></p>
+
+      <section class="tabla-seguimiento">
+        <div class="fila tabla-encabezado">
+          <span> Nombre </span>
+          <span> Estado </span>
+          <span> Nota </span>
+          <span> Asistencia </span>
+          <span> Acciones </span>
+        </div>
+
+        <div id="contenedor-estudiantes">
+
+        </div>
+      </section>
+
+      <button class="boton-guardar" id="btnGuardar">Guardar en LocalStorage</button>
+    </section>
+
+
+  </main>
   
-  </body>
+  <script src="seguimiento.js"></script>
+
+
+</body>
+
 </html>

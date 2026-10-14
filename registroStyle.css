@@ -1,19 +1,37 @@
+/* Distribución general de la página de registro */
 .pagina-registro {
   min-height: 100vh;
-  overflow-x: hidden;
+  height: 100vh;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
 }
 
+/* Espaciado del encabezado en el registro */
+header {
+  padding: 0px 15px;
+}
+
+@media (max-height: 680px) {
+  /* Permitir desplazamiento cuando la pantalla es baja */
+  .pagina-registro {
+    height: auto;
+    overflow-y: auto;
+  }
+}
+
+/* Centrado de la tarjeta y ubicación de la ilustración */
 .contenido-registro {
   flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
-  padding: 40px 20px;
+  padding: 20px;
+  overflow: hidden;
 }
 
+/* Apariencia de la tarjeta de registro */
 .tarjeta-registro {
   width: 360px;
   max-width: 90%;
@@ -24,23 +42,27 @@
   z-index: 2;
 }
 
+/* Campos y botón del formulario */
 .formulario-registro {
   display: flex;
   flex-direction: column;
 }
 
+/* Grupo de etiqueta e input */
 .grupo-registro {
   display: flex;
   flex-direction: column;
   margin-bottom: 14px;
 }
 
+/* Etiquetas de los campos de registro */
 .grupo-registro label {
   margin-bottom: 6px;
   font-size: 1rem;
   font-weight: bold;
 }
 
+/* Inputs de nombre, documento y datos de contacto */
 .grupo-registro input {
   height: 38px;
   padding: 8px 12px;
@@ -53,15 +75,18 @@
   transition: outline 0.2s;
 }
 
+/* Texto de ejemplo dentro de los campos */
 .grupo-registro input::placeholder {
   color: #3f5e3e;
   opacity: 0.8;
 }
 
+/* Resaltado del campo seleccionado */
 .grupo-registro input:focus {
   outline: 2px solid var(--red-line);
 }
 
+/* Botón de envío del formulario */
 .boton-registro {
   align-self: center;
   margin-top: 15px;
@@ -76,6 +101,7 @@
   transition: background-color 0.2s, transform 0.1s;
 }
 
+/* Estados del botón de registro */
 .boton-registro:hover {
   background-color: #521c15;
   transform: scale(1.02);
@@ -85,6 +111,7 @@
   transform: scale(0.98);
 }
 
+/* Mensajes de confirmación y validación */
 .mensaje-registro {
   margin-top: 15px;
   padding: 10px;
@@ -94,6 +121,7 @@
   display: none;
 }
 
+/* Mensaje de registro exitoso */
 .mensaje-registro.exito {
   display: block;
   background-color: #c8e6c9;
@@ -101,6 +129,7 @@
   border: 1px solid #81c784;
 }
 
+/* Mensaje de error en el registro */
 .mensaje-registro.error {
   display: block;
   background-color: #ffcdd2;
@@ -108,22 +137,29 @@
   border: 1px solid #e57373;
 }
 
+/* Ilustración de apoyo al formulario */
 .decoracion-registro {
   position: absolute;
-  right: 20px;
+  right: 0;
   bottom: 0;
   pointer-events: none;
   z-index: 1;
+  line-height: 0;
 }
 
+/* Ilustración del aprendiz */
 .estudianteHombre {
-  width: 420px;
-  max-width: 35vw;
+  width: 530px;
+  max-width: 38vw;
+  max-height: calc(100vh - 120px);
   height: auto;
+  object-fit: contain;
+  object-position: bottom right;
   display: block;
 }
 
 @media (max-width: 850px) {
+  /* Tamaño de la ilustración en pantallas pequeñas */
   .estudianteHombre {
     opacity: 0.25;
     max-width: 50vw;

@@ -1,3 +1,4 @@
+
 document.addEventListener('DOMContentLoaded', function() {
     // 1. Seleccionamos los elementos usando los IDs de tu HTML
     const formulario = document.getElementById('formularioLogin');
@@ -57,5 +58,50 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(() => {
             window.location.href = urlDestino;
         }, 1000);
+
     }
-});
+  });
+}
+
+// Redireccionar al panel de seguimiento
+function ingresoDocente(urlDestino) {
+  mensajeError.textContent = "";
+  mensajeError.style.opacity = '0';
+
+  botonSubmit.textContent = "Accediendo al panel...";
+  botonSubmit.style.backgroundColor = "#2c1e11";
+  botonSubmit.style.pointerEvents = "none";
+
+  setTimeout(function () {
+    window.location.href = urlDestino;
+  }, 1000);
+}
+
+// Mensaje temporal para estudiantes y redirección al index
+function avisoEstudiante(nombre) {
+  mensajeError.style.color = "#1b5e20";
+  mensajeError.style.fontWeight = "bold";
+  mensajeError.style.opacity = '1';
+  mensajeError.textContent = `Bienvenido ${nombre}. La plataforma de estudiantes está en desarrollo para la siguiente entrega. Redirigiendo al inicio...`;
+
+  botonSubmit.textContent = "Portal en desarrollo...";
+  botonSubmit.style.backgroundColor = "#2c1e11";
+  botonSubmit.style.pointerEvents = "none";
+
+  setTimeout(function () {
+    window.location.href = "index.html";
+  }, 2500);
+}
+
+// Mostrar mensaje de error en pantalla
+function mostrarError(texto) {
+  mensajeError.style.color = '#8b0000';
+  mensajeError.style.fontWeight = 'bold';
+  mensajeError.textContent = texto;
+  mensajeError.style.opacity = '1';
+
+  botonSubmit.classList.add('error-shake');
+  setTimeout(function () {
+    botonSubmit.classList.remove('error-shake');
+  }, 500);
+}
