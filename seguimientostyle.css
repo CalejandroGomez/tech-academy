@@ -6,6 +6,7 @@
   --tabla-bg: rgba(230, 205, 152, 0.85);
 }
 
+/* Fondo y tipografía del seguimiento */
 body {
   margin: 0;
   padding: 0;
@@ -15,46 +16,75 @@ body {
   min-height: 100vh;
 }
 
-/* NAVBAR / ENCABEZADO */
+/* Navegación del seguimiento académico */
 header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  padding: 10px 40px;
+  align-items: flex-end;
+  padding: 0 15px;
   background-color: var(--card-bg);
   border-bottom: 4px solid var(--marron-oscuro);
 }
 
+/* Grupo del logo y nombre de la academia */
 .logo {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 10px;
 }
 
+/* Tamaño del logo y el título del encabezado */
 .icono-pluma {
-  width: 50px;
-  height: auto;
+  width: 120px;
+  margin-bottom: -15px;
+}
+
+.logo-text {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+/* Títulos del logo */
+.logo-text h1 {
+  margin: 0;
 }
 
 
 
+/* Distribución de los enlaces de navegación */
 nav {
   display: flex;
   align-items: center;
   gap: 20px;
 }
 
+/* Enlaces de la navegación docente */
 nav a {
   text-decoration: none;
   color: var(--marron-oscuro);
   font-weight: bold;
+  font-size: 1.1rem;
 }
 
+/* Enlace para abrir el registro de notas */
+.enlace-panel {
+  padding: 8px 12px;
+  border: 1px solid var(--marron-oscuro);
+  border-radius: 6px;
+  background-color: var(--marron-oscuro);
+  color: var(--fondo-pergamino);
+}
+
+.enlace-panel:hover {
+  background-color: #6e4a24;
+}
+
+/* Icono de usuario del encabezado */
 nav .user-icon {
   width: 35px;
 }
 
-/* CONTENEDOR PRINCIPAL */
+/* Distribución del panel de seguimiento */
 .contenido-seguimiento {
   display: grid;
   grid-template-columns: 300px 1fr;
@@ -65,33 +95,35 @@ nav .user-icon {
   align-items: end;
 }
 
-/* IMAGEN DEL DOCENTE */
+/* Imagen lateral del docente */
 
 .docente{
   align-self:end ;
   margin-top: auto;
  
 }
+/* Tamaño y posición de la imagen del docente */
 .docente img {
   width: 100%;
   max-width: 280px;
   display: block;
-  transform: translateY(53px);
+  transform: translateY(80px);
 
 }
 
-/* PANEL ACADÉMICO */
+/* Datos generales del curso */
 .panel-seguimiento {
   display: flex;
   flex-direction: column;
 }
 
+/* Nombre de la materia */
 .datos-curso {
   font-size: 1.4rem;
   margin-bottom: 20px;
 }
 
-/* TARJETAS DE INDICADORES */
+/* Indicadores académicos */
 .indicadores {
   display: flex;
   justify-content: center;
@@ -99,6 +131,7 @@ nav .user-icon {
   margin-bottom: 30px;
 }
 
+/* Tarjetas con estadísticas del curso */
 .indicador {
   padding: 20px;
   background-color: var(--card-bg);
@@ -108,22 +141,25 @@ nav .user-icon {
   box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
 }
 
+/* Títulos de las estadísticas */
 .indicador h3 {
   margin: 0 0 10px 0;
   font-size: 1rem;
 }
 
+/* Valores destacados de las estadísticas */
 .indicador strong {
   font-size: 2.2rem;
   display: block;
 }
 
+/* Estados de entrega dentro de la tarjeta */
 .indicador p {
   margin: 4px 0;
   font-size: 0.9rem;
 }
 
-/* BUSCADOR */
+/* Búsqueda de estudiantes */
 .buscador-seguimiento {
   display: flex;
   align-items: center;
@@ -136,6 +172,7 @@ nav .user-icon {
   width: fit-content;
 }
 
+/* Campo de búsqueda de estudiantes */
 .buscador-seguimiento input {
   padding: 6px 12px;
   border: 1px solid var(--marron-oscuro);
@@ -143,7 +180,7 @@ nav .user-icon {
   font-family: 'Special Elite', cursive;
 }
 
-/* TABLA DE ESTUDIANTES */
+/* Filas de estudiantes */
 .tabla-seguimiento {
   background-color: var(--tabla-bg);
   border: 3px solid var(--marron-oscuro);
@@ -151,6 +188,7 @@ nav .user-icon {
   padding: 10px;
 }
 
+/* Distribución de las columnas de la tabla */
 .fila {
   display: grid;
   grid-template-columns: 2fr 1.2fr 1fr 1fr;
@@ -158,17 +196,19 @@ nav .user-icon {
   border-bottom: 2px solid rgba(74, 51, 25, 0.3);
 }
 
+/* Encabezado de la tabla de seguimiento */
 .tabla-encabezado {
   font-weight: bold;
   font-size: 1.1rem;
   border-bottom: 3px solid var(--marron-oscuro);
 }
 
+/* Última fila de la tabla */
 .fila:last-child {
   border-bottom: none;
 }
 
-/* BOTÓN GUARDAR */
+/* Botón para guardar los cambios */
 .boton-guardar {
   margin-top: 25px;
   padding: 12px 35px;
@@ -183,11 +223,12 @@ nav .user-icon {
   transition: background 0.2s;
 }
 
+/* Estado del botón guardar al pasar el puntero */
 .boton-guardar:hover {
   background-color: #6e4a24;
 }
 
-/* Footer */
+/* Información de contacto */
 
 footer {
   background-color: #6e4a24; 
@@ -201,6 +242,7 @@ footer {
   box-sizing: border-box;
 }
 
+/* Títulos y texto de las columnas del pie de página */
 .footer-column h3 {
   font-size: 1.1rem;
   margin-bottom: 10px;
@@ -214,7 +256,7 @@ footer {
   margin: 5px 0;
 }
 
-/*Formulario para guardar un nuevo estudiante*/
+/* Campos del formulario de calificaciones */
 .formulario-registro input, .formulario-registro select {
   padding: 8px;
   border: 2px solid #4a3319;
@@ -224,7 +266,7 @@ footer {
   color: #4a3319;
 }
 
-/* botón borrar y añadir*/
+/* Botones para agregar y borrar filas */
 .btn-Borrar, .btn-añadir, .btn-borrar2 {
   background-color: #b23b3b; 
   color: white;              

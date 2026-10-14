@@ -1,86 +1,112 @@
-// UTILIZAR LOS SELECTORES (Conectamos el JS con el HTML)
+// NOTAS DEL EQUIPO: Selectores principales para enlazar JavaScript con el HTML
+const contenedorEstudiantes = document.getElementById('contenedor-estudiantes');
+const formEstudiante = document.getElementById('form-estudiante');
+const inputNombre = document.getElementById('nuevo-nombre');
+const selectEstado = document.getElementById('nuevo-estado');
+const inputNota = document.getElementById('nueva-nota');
+const inputAsistencia = document.getElementById('nueva-asistencia');
+const inputBuscar = document.getElementById('buscar');
+const btnGuardar = document.getElementById('btnGuardar');
 
-const elementop = document.getElementById('contenedor-estudiantes')
-const form = document.querySelector('form')
+// NOTAS DEL EQUIPO: Datos iniciales del curso o lectura desde LocalStorage (persistencia)
+const datosPorDefecto = [
+  { nombre: "Mariana Gómez", estado: "Entregado", nota: "4.5", asistencia: "95%" },
+  { nombre: "Carlos Restrepo", estado: "En revisión", nota: "3.8", asistencia: "88%" },
+  { nombre: "Luisa Fernández", estado: "Pendiente", nota: "2.5", asistencia: "75%" }
+];
 
+let estudiantes = JSON.parse(localStorage.getItem('estudiantes_seguimiento')) || datosPorDefecto;
 
-// Selectores para capturar las casillas donde el usuario escribe
-const Nombre = document.getElementById('nuevo-nombre')
-const Estado = document.getElementById('nuevo-estado')
-const Nota = document.getElementById('nueva-nota')
-const Asistencia = document.getElementById('nueva-asistencia')
+// NOTAS DEL EQUIPO: Función para dibujar las filas de la tabla usando manipulación del DOM
+function renderizarTabla() {
+  contenedorEstudiantes.innerHTML = '';
 
+  estudiantes.forEach(function (estudiante, indice) {
+    const fila = document.createElement('div');
+    fila.classList.add('fila');
 
-// CREACIÓN DE ELEMENTOS EN EL DOM (Estudiante inicial para que la tabla no abra vacía)
-const Estudiante_1 = document.createElement('div')
-Estudiante_1.setAttribute('class','fila')
-// agregar atributos del estudiante
-Estudiante_1.innerHTML = '<span>Mariana Gómez</span><span>Entregado</span><span>4.5</span><span>95%</span>'
+    const colNombre = document.createElement('span');
+    colNombre.textContent = estudiante.nombre;
 
+    const colEstado = document.createElement('span');
+    colEstado.textContent = estudiante.estado;
 
-// creacion de botón Borrar: para eliminar un estudiante
-const btnBorrar=document.createElement('button')
-btnBorrar.setAttribute('class', 'btn-Borrar')
-btnBorrar.innerHTML='Borrar'
+    const colNota = document.createElement('span');
+    colNota.textContent = estudiante.nota;
 
-btnBorrar.addEventListener('click', function(){
-    alert('se va a eliminar el registro de Mariana Gómez')
-    Estudiante_1.remove()
-})
+    const colAsistencia = document.createElement('span');
+    colAsistencia.textContent = estudiante.asistencia;
 
-const cbtnborrar= document.createElement('span') // es necesario crearle un epacio al botón
-cbtnborrar.appendChild(btnBorrar)
+    // Botón borrar para la operación Delete del CRUD
+    const colAccion = document.createElement('span');
+    const btnBorrar = document.createElement('button');
+    btnBorrar.classList.add('btn-Borrar');
+    btnBorrar.textContent = 'Borrar';
 
-Estudiante_1.appendChild(cbtnborrar)    
-elementop.appendChild(Estudiante_1) 
-
-
-
-// ---- EVENTO: AGREGAR ESTUDIANTE DESDE EL FORMULARIO (De tus apuntes) ----
-
-
-// El submit envia todo en un paquete. Funciona con enter y enviar (De tus apuntes)
-form.addEventListener('submit', function (event) {
-    event.preventDefault()
-
-   // Fabricamos la nueva fila para el alumno
-    const fila2= document.createElement('div');
-    fila2.setAttribute('class', 'fila');
-    
-    // Creamos las 4 columnas para los datos
-    const cNombre = document.createElement('span') // nombre del estudiante
-    cNombre.innerHTML = Nombre.value
-
-    const cEstado = document.createElement('span')
-    cEstado.innerHTML = Estado.value
-
-    const cNota = document.createElement('span') // notas
-    cNota.innerHTML = Nota.value
-
-    const cAsistencia = document.createElement('span')
-    cAsistencia.innerHTML = Asistencia.value
-
-    //nuevo botón de borrar para el alumno
-    const btnNuevoBorrar = document.createElement('button')
-    btnNuevoBorrar.setAttribute('class', 'btn-borrar2')
-    btnNuevoBorrar.innerHTML = 'Borrar'
-
-    btnNuevoBorrar.addEventListener('click', function() {
-        fila2.remove();
+    btnBorrar.addEventListener('click', function () {
+      if (confirm(`¿Seguro que deseas eliminar a ${estudiante.nombre}?`)) {
+        estudiantes.splice(indice, 1);
+        guardarEnStorage();
+        renderizarTabla();
+      }
     });
 
-    // columna del nuevo boton borrrar
-    const cbtNuevo = document.createElement('span');
-    cbtNuevo.appendChild(btnNuevoBorrar);
+    colAccion.appendChild(btnBorrar);
 
-    // datos nuevos en la fila 2
-    fila2.appendChild(cNombre);
-    fila2.appendChild(cEstado);
-    fila2.appendChild(cNota);
-    fila2.appendChild(cAsistencia);
-    fila2.appendChild(cbtNuevo);
+    fila.appendChild(colNombre);
+    fila.appendChild(colEstado);
+    fila.appendChild(colNota);
+    fila.appendChild(colAsistencia);
+    fila.appendChild(colAccion);
 
-    elementop.appendChild(fila2);
-    
-    form.reset();
-});
+    contenedorEstudiantes.appendChild(fila);
+  });
+}
+
+// NOTAS DEL EQUIPO: Guardar el arreglo actual en LocalStorage
+function guardarEnStorage() {
+  localStorage.setItem('estudiantes_seguimiento', JSON.stringify(estudiantes));
+}
+
+// NOTAS DEL EQUIPO: Evento submit para agregar un estudiante nuevo (Create del CRUD)
+if (formEstudiante) {
+  formEstudiante.addEventListener('submit', function (evento) {
+    evento.preventDefault();
+
+    const nuevo = {
+      nombre: inputNombre.value.trim(),
+      estado: selectEstado.value,
+      nota: inputNota.value.trim(),
+      asistencia: inputAsistencia.value.trim()
+    };
+
+    estudiantes.push(nuevo);
+    guardarEnStorage();
+    renderizarTabla();
+    formEstudiante.reset();
+  });
+}
+
+// NOTAS DEL EQUIPO: Botón de guardado explícito en LocalStorage
+if (btnGuardar) {
+  btnGuardar.addEventListener('click', function () {
+    guardarEnStorage();
+    alert('¡Datos de calificaciones guardados exitosamente en LocalStorage!');
+  });
+}
+
+// NOTAS DEL EQUIPO: Filtro de búsqueda en tiempo real con evento input
+if (inputBuscar) {
+  inputBuscar.addEventListener('input', function () {
+    const filtro = inputBuscar.value.toLowerCase();
+    const filas = contenedorEstudiantes.querySelectorAll('.fila');
+
+    filas.forEach(function (fila) {
+      const nombre = fila.querySelector('span').textContent.toLowerCase();
+      fila.style.display = nombre.includes(filtro) ? 'grid' : 'none';
+    });
+  });
+}
+
+// NOTAS DEL EQUIPO: Inicializar la tabla al cargar la página
+renderizarTabla();

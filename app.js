@@ -1,3 +1,4 @@
+// NOTAS DEL EQUIPO: Arreglo de objetos con la información de los programas académicos
 const programas = [
   {
     id: 1,
@@ -22,12 +23,13 @@ const programas = [
   }
 ];
 
+// NOTAS DEL EQUIPO: Selectores para elementos interactivos del inicio
 const btnExplorar = document.getElementById("btn-explorar");
 const contenedorProgramas = document.getElementById("programas");
 const contenedorDetalle = document.getElementById("detalle-programa");
 const tarjetas = document.querySelectorAll(".card");
-const enlaceIngresar = document.getElementById("link-ingresar");
 
+// NOTAS DEL EQUIPO: Evento click para scroll suave hacia la sección de saberes
 if (btnExplorar && contenedorProgramas) {
   btnExplorar.addEventListener("click", function (evento) {
     evento.preventDefault();
@@ -35,6 +37,7 @@ if (btnExplorar && contenedorProgramas) {
   });
 }
 
+// NOTAS DEL EQUIPO: Evento click en cada tarjeta para consultar y mostrar detalles en el DOM
 tarjetas.forEach(function (tarjeta) {
   tarjeta.addEventListener("click", function () {
     const idSeleccionado = Number(tarjeta.getAttribute("data-id"));
@@ -48,6 +51,7 @@ tarjetas.forEach(function (tarjeta) {
   });
 });
 
+// NOTAS DEL EQUIPO: Renderizado dinámico del panel de detalles del curso
 function mostrarDetalle(programa) {
   contenedorDetalle.innerHTML = `
     <div class="panel-detalle">
@@ -69,10 +73,4 @@ function mostrarDetalle(programa) {
       contenedorDetalle.innerHTML = "";
     });
   }
-}
-
-const usuarioActivo = JSON.parse(localStorage.getItem("usuarioActivo"));
-if (usuarioActivo && enlaceIngresar) {
-  enlaceIngresar.textContent = `Hola, ${usuarioActivo.nombre}`;
-  enlaceIngresar.href = "#";
 }

@@ -1,56 +1,53 @@
-/* =========================================
-   ESTILOS GENERALES Y LAYOUT PRINCIPAL
-   ========================================= */
+/* Distribución general de la página de acceso */
 .pagina-login {
-  /* CAMBIO CLAVE: Usa height en lugar de min-height para fijar la pantalla */
-  height: 100vh; 
-  /* CAMBIO CLAVE: Bloquea el scroll vertical y horizontal */
-  overflow: hidden; 
+  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
 }
 
+/* Espaciado del encabezado en la página de acceso */
 header {
-  padding: 0px 15px; /* Espaciado interno del encabezado */
+  padding: 0px 15px;
 }
 
+/* Columnas para ilustraciones y formulario */
 .contenido-login {
-  /* CAMBIO CLAVE: flex: 1 hace que ocupe todo el espacio restante debajo del header */
-  flex: 1; 
-  /* Se eliminó el min-height: 520px para evitar que fuerce el scroll */
+  flex: 1;
   display: grid;
-  grid-template-columns: 1fr 340px 1fr; /* 3 columnas: imagen izquierda, formulario, imagen derecha */
-  align-items: center; /* Centra los elementos verticalmente en el grid */
+  grid-template-columns: 1fr 340px 1fr;
+  align-items: center;
   padding: 10px 20px 0px;
   gap: 20px;
-  /* CAMBIO CLAVE: Evita que el contenedor genere scroll interno */
-  overflow: hidden; 
+  overflow: hidden;
 }
 
-/* =========================================
-   TARJETA Y FORMULARIO DE LOGIN
-   ========================================= */
+/* Apariencia de la tarjeta de acceso */
 .tarjeta-login {
   width: 340px;
   max-width: 100%;
   padding: 40px 45px;
-  border-radius: 40px;      /* Bordes redondeados */
-  background-color: var(--card-bg); /* Variable de color de fondo (debe estar en style.css) */
-  box-shadow: 3px 6px 20px rgba(0, 0, 0, 0.15); /* Sombra para dar efecto de elevación */
-  z-index: 2; /* Asegura que el formulario esté por encima de las decoraciones */
+  border-radius: 40px;
+  background-color: var(--card-bg);
+  box-shadow: 3px 6px 20px rgba(0, 0, 0, 0.15);
+  z-index: 2;
 }
 
+/* Formulario de acceso */
 .formulario-login {
   display: flex;
-  flex-direction: column; /* Apila los campos uno debajo del otro */
+  flex-direction: column;
   align-items: center;
 }
 
+/* Grupo de etiqueta e input */
 .grupo-campo {
   width: 100%;
-  margin-bottom: 20px; /* Espaciado entre cada campo (usuario/contraseña) */
+  margin-bottom: 20px;
 }
 
+/* Etiquetas de usuario y contraseña */
 .grupo-campo label {
   display: block;
   margin-bottom: 8px;
@@ -58,8 +55,9 @@ header {
   font-weight: bold;
 }
 
+/* Campo de entrada y su icono */
 .campo-login {
-  position: relative; /* Permite posicionar el ícono de forma absoluta dentro del input */
+  position: relative;
   display: flex;
   align-items: center;
 }
@@ -67,31 +65,31 @@ header {
 .campo-login input {
   width: 100%;
   height: 38px;
-  padding: 8px 38px 8px 12px; /* Espacio extra a la derecha (38px) para que el texto no pise el ícono */
+  padding: 8px 38px 8px 12px;
   border: none;
   border-radius: 6px;
   background-color: #9fc79d;
   color: var(--text-color);
-  font-family: "Special Elite", cursive; /* Tipografía estilo RPG/Medieval */
+  font-family: "Special Elite", cursive;
   font-size: 1rem;
-  transition: outline 0.2s; /* Animación suave al hacer clic */
+  transition: outline 0.2s;
 }
 
+/* Resaltado del campo seleccionado */
 .campo-login input:focus {
-  outline: 2px solid var(--red-line); /* Borde rojo al seleccionar el campo */
+  outline: 2px solid var(--red-line);
 }
 
+/* Iconos dentro de los campos */
 .icono-input {
   position: absolute;
-  right: 10px; /* Posiciona el ícono (♟/🔑) a la derecha del input */
+  right: 10px;
   font-size: 1.1rem;
-  pointer-events: none; /* Evita que el ícono interfiera con el clic en el input */
+  pointer-events: none;
   opacity: 0.8;
 }
 
-/* =========================================
-   BOTONES Y ENLACES
-   ========================================= */
+/* Botón principal y enlaces del formulario */
 .boton-login {
   margin-top: 10px;
   margin-bottom: 15px;
@@ -103,81 +101,81 @@ header {
   font-family: "Special Elite", cursive;
   font-size: 1rem;
   cursor: pointer;
-  transition: background-color 0.2s, transform 0.1s; /* Animación de color y tamaño */
+  transition: background-color 0.2s, transform 0.1s;
 }
 
+/* Estados del botón de acceso */
 .boton-login:hover {
-  background-color: #521c15; /* Oscurece el botón al pasar el mouse */
-  transform: scale(1.02); /* Aumenta ligeramente el tamaño */
+  background-color: #521c15;
+  transform: scale(1.02);
 }
 
 .boton-login:active {
-  transform: scale(0.98); /* Reduce el tamaño al hacer clic (efecto de presionado) */
+  transform: scale(0.98);
 }
 
+/* Enlaces secundarios del formulario */
 .enlace-login {
   margin-bottom: 8px;
   color: var(--text-color);
-  text-decoration: none; /* Quita el subrayado por defecto */
+  text-decoration: none;
   font-size: 0.95rem;
   transition: color 0.2s, text-decoration 0.2s;
 }
 
+/* Estado de los enlaces al pasar el puntero */
 .enlace-login:hover {
-  text-decoration: underline; /* Subraya al pasar el mouse */
-  text-underline-offset: 4px; /* Separa el subrayado del texto */
+  text-decoration: underline;
+  text-underline-offset: 4px;
   color: var(--red-line);
 }
 
+/* Mensaje de validación del acceso */
 .mensaje-login {
-  min-height: 20px; /* Reserva el espacio para mensajes de error (ej: credenciales incorrectas) */
+  min-height: 20px;
   color: #8b0000;
   font-size: 0.85rem;
   text-align: center;
   margin-bottom: 8px;
 }
 
-/* =========================================
-   IMÁGENES DE DECORACIÓN (ESTUDIANTE Y ANTORCHA)
-   ========================================= */
+/* Posición de la maga y la antorcha */
 .decoracion-login {
   display: flex;
   justify-content: center;
-  align-items: flex-end; /* Alinea las imágenes a la parte inferior del contenedor */
+  align-items: flex-end;
   height: 100%;
-  overflow: hidden; /* CAMBIO CLAVE: Corta cualquier exceso de la imagen */
+  overflow: hidden;
 }
 
+/* Ilustración de la aprendiz */
 .estudianteMujer {
   width: 480px;
   max-width: 100%;
-  /* CAMBIO CLAVE: Impide que la imagen sea más alta que su contenedor */
-  max-height: 100%; 
-  /* CAMBIO CLAVE: Ajusta la imagen sin distorsionarla */
-  object-fit: contain; 
+  max-height: 100%;
+  object-fit: contain;
   align-self: flex-end;
 }
 
+/* Ilustración de la antorcha */
 .imagen-antorcha {
   width: 200px;
   max-width: 100%;
-  /* CAMBIO CLAVE: Impide que la antorcha rompa el alto de la pantalla */
-  max-height: 100%; 
+  max-height: 100%;
   object-fit: contain;
-  align-self: center; /* Centra la antorcha verticalmente */
+  align-self: center;
 }
 
-/* =========================================
-   DISEÑO RESPONSIVO (PANTALLAS PEQUEÑAS)
-   ========================================= */
+/* Presentación del acceso en pantallas pequeñas */
 @media (max-width: 900px) {
   .contenido-login {
-    grid-template-columns: 1fr; /* Pasa de 3 columnas a 1 sola columna */
-    justify-items: center; /* Centra el formulario */
+    grid-template-columns: 1fr;
+    justify-items: center;
     padding: 20px 15px;
   }
 
+  /* Ocultar ilustraciones en pantallas pequeñas */
   .decoracion-login {
-    display: none; /* Oculta las imágenes en móviles para ahorrar espacio */
+    display: none;
   }
 }

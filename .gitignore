@@ -1,6 +1,7 @@
 # Carpetas privadas / locales
 curso/
 *.md
+!README.md
 # Dependencias y compilación (por si se agregan herramientas en el futuro)
 node_modules/
 dist/

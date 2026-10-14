@@ -6,6 +6,7 @@
   --tabla-bg: rgba(230, 205, 152, 0.85);
 }
 
+/* Fondo y tipografía del panel docente */
 body {
   margin: 0;
   padding: 0;
@@ -17,45 +18,74 @@ body {
   min-height: 100vh;
 }
 
-/* NAVBAR / ENCABEZADO */
+/* Navegación del panel docente */
 header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  padding: 10px 40px;
+  align-items: flex-end;
+  padding: 0 15px;
   background-color: var(--card-bg);
   border-bottom: 4px solid var(--marron-oscuro);
 }
 
+/* Grupo del logo y nombre de la academia */
 .logo {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 10px;
 }
 
+/* Tamaño del logo y el título del encabezado */
 .icono-pluma {
-  width: 50px;
-  height: auto;
+  width: 120px;
+  margin-bottom: -15px;
+}
+
+.logo-text {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+/* Títulos del logo */
+.logo-text h1 {
+  margin: 0;
 }
 
 
+/* Distribución de los enlaces de navegación */
 nav {
   display: flex;
   align-items: center;
   gap: 20px;
 }
 
+/* Enlaces de la navegación docente */
 nav a {
   text-decoration: none;
   color: var(--marron-oscuro);
   font-weight: bold;
+  font-size: 1.1rem;
 }
 
+/* Enlace para abrir el otro panel docente */
+.enlace-panel {
+  padding: 8px 12px;
+  border: 1px solid var(--marron-oscuro);
+  border-radius: 6px;
+  background-color: var(--marron-oscuro);
+  color: var(--fondo-pergamino);
+}
+
+.enlace-panel:hover {
+  background-color: #6e4a24;
+}
+
+/* Icono de usuario del encabezado */
 nav .user-icon {
   width: 35px;
 }
 
-/* DISTRIBUCIÓN DE LA PÁGINA (GRID) */
+/* Distribución del contenido docente */
 .contenido-docente {
   display: grid;
   grid-template-columns: 300px 1fr;
@@ -65,12 +95,15 @@ nav .user-icon {
   margin: 0 auto;
 }
 
+/* Posición de la imagen del docente */
 .docente-imagen {
   align-self: end;
   margin-top: auto;
   line-height: 0;
+  transform: translateY(90px);
 }
 
+/* Tamaño de la imagen del docente */
 .docente-imagen img {
   width: 100%;
   max-width: 280px;
@@ -79,6 +112,7 @@ nav .user-icon {
 }
 
 
+/* Tarjetas de contenido y tabla */
 .tarjeta-modulo, .tabla-contenedor {
   background-color: var(--card-bg);
   border: 2px solid var(--marron-oscuro);
@@ -88,13 +122,14 @@ nav .user-icon {
   margin-bottom: 25px;
 }
 
-/* FORMULARIO DE ENTRADA DE DATOS */
+/* Campos para registrar calificaciones */
 .formulario-registro h3 {
   margin-top: 0;
   margin-bottom: 15px;
   font-size: 1.2rem;
 }
 
+/* Distribución de los campos de calificación */
 .formulario-registro form {
   display: flex;
   gap: 12px;
@@ -102,6 +137,7 @@ nav .user-icon {
   justify-content: center;
 }
 
+/* Campos para ingresar datos del estudiante */
 .formulario-registro input {
   padding: 8px;
   border: 2px solid var(--marron-oscuro);
@@ -112,30 +148,33 @@ nav .user-icon {
   width: 140px;
 }
 
+/* Ancho del campo para el nombre del estudiante */
 #nuevo-nombre {
   width: 220px;
 }
 
-/* TABLA DE CALIFICACIONES */
+/* Columnas de la tabla de calificaciones */
 .fila-docente {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1.3fr 1fr; /* Tus 5 columnas del HTML */
+  grid-template-columns: 2fr 1fr 1fr 1.3fr 1fr;
   align-items: center;
   text-align: center;
   border-bottom: 2px solid rgba(74, 51, 25, 0.3);
 }
 
+/* Encabezado de la tabla de calificaciones */
 .encabezado-tabla-docente {
   font-size: 1.15rem;
   font-weight: bold;
   border-bottom: 3px solid var(--marron-oscuro);
 }
 
+/* Celdas de la tabla de calificaciones */
 .fila-docente span {
   padding: 12px 6px;
 }
 
-/* BOTONES*/
+/* Acciones del panel docente */
 .btn-añadir, .boton-guardar {
   padding: 6px 15px;
   border: 2px solid var(--marron-oscuro);
@@ -147,14 +186,14 @@ nav .user-icon {
   color: var(--fondo-pergamino);
 }
 
+/* Estado de los botones al pasar el puntero */
 .btn-añadir:hover, .boton-guardar:hover {
-  background-color: #6e4a24; /* Color café más claro al pasar el mouse */
+  background-color: #6e4a24;
 }
 
-/* Separación exclusiva para el botón de abajo (Cerrar sesión) */
 .boton-guardar {
   margin-top: 20px;
   display: block;
   margin-left: auto;
-  margin-right: auto; /* centrar debajo de la tabla */
+  margin-right: auto;
 }
