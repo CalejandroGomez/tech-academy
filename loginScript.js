@@ -1,52 +1,64 @@
-// Elementos del formulario de login
-const formulario = document.getElementById('formularioLogin');
-const inputUsuario = document.getElementById('usuario');
-const inputContrasena = document.getElementById('contrasena');
-const mensajeError = document.getElementById('mensajeLogin');
-const botonSubmit = document.querySelector('.boton-login');
 
-// Validar credenciales al enviar el formulario
-if (formulario) {
-  formulario.addEventListener('submit', function (evento) {
-    evento.preventDefault();
+document.addEventListener('DOMContentLoaded', function() {
+    // 1. Seleccionamos los elementos usando los IDs de tu HTML
+    const formulario = document.getElementById('formularioLogin');
+    const inputUsuario = document.getElementById('usuario');
+    const inputContrasena = document.getElementById('contrasena');
+    const mensajeError = document.getElementById('mensajeLogin');
+    const botonSubmit = document.querySelector('.boton-login');
 
-    const user = inputUsuario.value.trim();
-    const pass = inputContrasena.value.trim();
+    // Damos un poco de estilo inicial al mensaje de error (oculto por defecto)
+    mensajeError.style.color = '#8B0000';
+    mensajeError.style.fontWeight = 'bold';
+    mensajeError.style.transition = 'opacity 0.3s';
+    mensajeError.style.opacity = '0'; 
 
-    // Usuarios registrados en localStorage
-    const usuariosRegistrados = JSON.parse(localStorage.getItem('usuarios')) || [];
+    // 2. Escuchamos el evento de envío del formulario
+    formulario.addEventListener('submit', function(evento) {
+        evento.preventDefault(); // Evitamos que la página se recargue
 
-    // Buscar coincidencia en la lista de registrados
-    let usuarioEncontrado = null;
-    for (let u of usuariosRegistrados) {
-      if ((u.nombre === user || u.documento === user || u.correo === user) && u.contrasena === pass) {
-        usuarioEncontrado = u;
-        break;
-      }
-    }
+        // Tomamos los valores y quitamos espacios en blanco
+        const user = inputUsuario.value.trim();
+        const pass = inputContrasena.value.trim();
 
-    // 1. Docente o Admin -> acceso al panel de seguimiento
-    if ((user === "admin" && pass === "123") || (user === "docente" && pass === "1234")) {
-      const docenteActivo = {
-        nombre: user === "docente" ? "Profesor Diego" : "Administrador",
-        rol: "docente"
-      };
-      localStorage.setItem('usuarioActivo', JSON.stringify(docenteActivo));
-      ingresoDocente("seguimiento.html");
+        // 3. Validaciones
+        if (user === "docente" && pass === "1234") {
+            // Reemplaza el enlace por la ruta real que hizo tu equipo para el admin
+            ingresoExitoso("docente.html"); 
 
-    // 2. Estudiante -> aviso de plataforma en desarrollo
-    } else if ((user === "estudiante" && pass === "estudiante123") || (usuarioEncontrado && usuarioEncontrado.rol === "aprendiz")) {
-      const nombreEstudiante = usuarioEncontrado ? usuarioEncontrado.nombre : "Aprendiz";
-      const estudianteActivo = {
-        nombre: nombreEstudiante,
-        rol: "aprendiz"
-      };
-      localStorage.setItem('usuarioActivo', JSON.stringify(estudianteActivo));
-      avisoEstudiante(nombreEstudiante);
+        } else if (user === "estudiante" && pass === "estudiante123") {
+            // Reemplaza el enlace por la ruta real para el estudiante
+            ingresoExitoso("#"); 
 
-    // 3. Error en credenciales
-    } else {
-      mostrarError("Usuario o contraseña incorrectos.");
+        } else {
+            // 4. Fallo: mostramos el error y hacemos vibrar el botón
+            mensajeError.textContent = "Nombre o contraseña inválida.";
+            mensajeError.style.opacity = '1';
+            
+            botonSubmit.classList.add('error-shake');
+            
+            // Quitamos la animación después de 0.5s para que pueda volver a usarse
+            setTimeout(() => {
+                botonSubmit.classList.remove('error-shake');
+            }, 500);
+        }
+    });
+
+    // Función para manejar el éxito y la redirección
+    function ingresoExitoso(urlDestino) {
+        mensajeError.style.opacity = '0';
+        
+        // Efecto temático en el botón
+        botonSubmit.textContent = "Abriendo portal...";
+        botonSubmit.style.backgroundColor = "#2c1e11";
+        botonSubmit.style.transform = "scale(0.95)";
+        botonSubmit.style.pointerEvents = "none"; // Deshabilita el botón
+
+        // Redirige al link de tu equipo tras 1 segundo
+        setTimeout(() => {
+            window.location.href = urlDestino;
+        }, 1000);
+
     }
   });
 }
