@@ -1,4 +1,4 @@
-// NOTAS DEL EQUIPO: Selectores principales para enlazar JavaScript con el HTML
+// Referencias a los elementos del formulario y la tabla
 const contenedorEstudiantes = document.getElementById('contenedor-estudiantes');
 const formEstudiante = document.getElementById('form-estudiante');
 const inputNombre = document.getElementById('nuevo-nombre');
@@ -7,8 +7,13 @@ const inputNota = document.getElementById('nueva-nota');
 const inputAsistencia = document.getElementById('nueva-asistencia');
 const inputBuscar = document.getElementById('buscar');
 const btnGuardar = document.getElementById('btnGuardar');
+const btnSubmitEstudiante = document.getElementById('btn-submit-estudiante');
+const btnCancelarEdicion = document.getElementById('btn-cancelar-edicion');
 
-// NOTAS DEL EQUIPO: Datos iniciales del curso o lectura desde LocalStorage (persistencia)
+// Guarda el índice del estudiante que se está editando
+let indiceEditando = null;
+
+// Lista inicial por defecto o lo que haya en localStorage
 const datosPorDefecto = [
   { nombre: "Mariana Gómez", estado: "Entregado", nota: "4.5", asistencia: "95%" },
   { nombre: "Carlos Restrepo", estado: "En revisión", nota: "3.8", asistencia: "88%" },
@@ -17,11 +22,14 @@ const datosPorDefecto = [
 
 let estudiantes = JSON.parse(localStorage.getItem('estudiantes_seguimiento')) || datosPorDefecto;
 
-// NOTAS DEL EQUIPO: Función para dibujar las filas de la tabla usando manipulación del DOM
+// Dibuja las filas de estudiantes en la tabla
 function renderizarTabla() {
   contenedorEstudiantes.innerHTML = '';
 
-  estudiantes.forEach(function (estudiante, indice) {
+  // Recorrer los estudiantes para generar cada fila
+  for (let indice = 0; indice < estudiantes.length; indice++) {
+    const estudiante = estudiantes[indice];
+
     const fila = document.createElement('div');
     fila.classList.add('fila');
 
@@ -37,20 +45,49 @@ function renderizarTabla() {
     const colAsistencia = document.createElement('span');
     colAsistencia.textContent = estudiante.asistencia;
 
-    // Botón borrar para la operación Delete del CRUD
     const colAccion = document.createElement('span');
+
+    // Botón para cargar los datos en el formulario y poder editar
+    const btnEditar = document.createElement('button');
+    btnEditar.classList.add('btn-editar');
+    btnEditar.textContent = 'Editar';
+
+    btnEditar.addEventListener('click', function () {
+      // Cargamos los datos del estudiante seleccionado en el formulario
+      inputNombre.value = estudiante.nombre;
+      selectEstado.value = estudiante.estado;
+      inputNota.value = estudiante.nota;
+      inputAsistencia.value = estudiante.asistencia;
+
+      // Cambiamos el modo a edición
+      indiceEditando = indice;
+      if (btnSubmitEstudiante) {
+        btnSubmitEstudiante.textContent = 'Actualizar';
+      }
+      if (btnCancelarEdicion) {
+        btnCancelarEdicion.style.display = 'inline-block';
+      }
+      inputNombre.focus();
+    });
+
+    // Botón para eliminar un estudiante
     const btnBorrar = document.createElement('button');
     btnBorrar.classList.add('btn-Borrar');
     btnBorrar.textContent = 'Borrar';
 
     btnBorrar.addEventListener('click', function () {
       if (confirm(`¿Seguro que deseas eliminar a ${estudiante.nombre}?`)) {
+        // Si estábamos editando este mismo estudiante, cancelamos la edición
+        if (indiceEditando === indice) {
+          cancelarEdicion();
+        }
         estudiantes.splice(indice, 1);
         guardarEnStorage();
         renderizarTabla();
       }
     });
 
+    colAccion.appendChild(btnEditar);
     colAccion.appendChild(btnBorrar);
 
     fila.appendChild(colNombre);
@@ -60,34 +97,71 @@ function renderizarTabla() {
     fila.appendChild(colAccion);
 
     contenedorEstudiantes.appendChild(fila);
-  });
+  }
 }
 
-// NOTAS DEL EQUIPO: Guardar el arreglo actual en LocalStorage
+// Restaura el formulario al estado original
+function cancelarEdicion() {
+  indiceEditando = null;
+  formEstudiante.reset();
+  if (btnSubmitEstudiante) {
+    btnSubmitEstudiante.textContent = 'Añadir';
+  }
+  if (btnCancelarEdicion) {
+    btnCancelarEdicion.style.display = 'none';
+  }
+}
+
+// Guardar en localStorage
 function guardarEnStorage() {
   localStorage.setItem('estudiantes_seguimiento', JSON.stringify(estudiantes));
 }
 
-// NOTAS DEL EQUIPO: Evento submit para agregar un estudiante nuevo (Create del CRUD)
+// Agregar un nuevo estudiante o actualizar el seleccionado
 if (formEstudiante) {
   formEstudiante.addEventListener('submit', function (evento) {
     evento.preventDefault();
 
-    const nuevo = {
-      nombre: inputNombre.value.trim(),
-      estado: selectEstado.value,
-      nota: inputNota.value.trim(),
-      asistencia: inputAsistencia.value.trim()
+    const nombre = inputNombre.value.trim();
+    const estado = selectEstado.value;
+    const nota = inputNota.value.trim();
+    const asistencia = inputAsistencia.value.trim();
+
+    if (!nombre || !nota || !asistencia) {
+      alert('Por favor completa todos los campos del estudiante.');
+      return;
+    }
+
+    const registro = {
+      nombre: nombre,
+      estado: estado,
+      nota: nota,
+      asistencia: asistencia
     };
 
-    estudiantes.push(nuevo);
+    if (indiceEditando !== null) {
+      // Actualizar registro existente
+      estudiantes[indiceEditando] = registro;
+      cancelarEdicion();
+    } else {
+      // Agregar nuevo registro
+      estudiantes.push(registro);
+      formEstudiante.reset();
+    }
+
     guardarEnStorage();
     renderizarTabla();
-    formEstudiante.reset();
   });
 }
 
-// NOTAS DEL EQUIPO: Botón de guardado explícito en LocalStorage
+// Cancelar edición al hacer clic
+if (btnCancelarEdicion) {
+  btnCancelarEdicion.addEventListener('click', function () {
+    cancelarEdicion();
+  });
+}
+
+// Guardar cambios manualmente en localStorage
 if (btnGuardar) {
   btnGuardar.addEventListener('click', function () {
     guardarEnStorage();
@@ -95,18 +169,22 @@ if (btnGuardar) {
   });
 }
 
-// NOTAS DEL EQUIPO: Filtro de búsqueda en tiempo real con evento input
+// Buscador en tiempo real por nombre
 if (inputBuscar) {
   inputBuscar.addEventListener('input', function () {
     const filtro = inputBuscar.value.toLowerCase();
     const filas = contenedorEstudiantes.querySelectorAll('.fila');
 
-    filas.forEach(function (fila) {
-      const nombre = fila.querySelector('span').textContent.toLowerCase();
-      fila.style.display = nombre.includes(filtro) ? 'grid' : 'none';
-    });
+    // Filtrar filas según lo escrito
+    for (let fila of filas) {
+      const colTexto = fila.querySelector('span');
+      if (colTexto) {
+        const nombre = colTexto.textContent.toLowerCase();
+        fila.style.display = nombre.includes(filtro) ? 'grid' : 'none';
+      }
+    }
   });
 }
 
-// NOTAS DEL EQUIPO: Inicializar la tabla al cargar la página
+// Cargar tabla al iniciar
 renderizarTabla();

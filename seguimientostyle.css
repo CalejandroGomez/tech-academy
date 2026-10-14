@@ -191,8 +191,9 @@ nav .user-icon {
 /* Distribución de las columnas de la tabla */
 .fila {
   display: grid;
-  grid-template-columns: 2fr 1.2fr 1fr 1fr;
+  grid-template-columns: 2fr 1.2fr 0.8fr 1fr 1.6fr;
   padding: 12px 10px;
+  align-items: center;
   border-bottom: 2px solid rgba(74, 51, 25, 0.3);
 }
 
@@ -276,4 +277,23 @@ footer {
   cursor: pointer;
   font-family: 'Special Elite', cursive; 
 }
+
+/* Botón para editar registros existentes */
+.btn-editar {
+  background-color: var(--marron-oscuro);
+  color: var(--fondo-pergamino);
+  border: 2px solid var(--marron-oscuro);
+  border-radius: 8px;
+  padding: 5px 10px;
+  margin-right: 6px;
+  cursor: pointer;
+  font-family: 'Special Elite', cursive;
+  font-size: 0.9rem;
+  transition: background-color 0.2s;
+}
+
+.btn-editar:hover {
+  background-color: #6e4a24;
+}
+
 

@@ -1,11 +1,11 @@
-// Referencias a los elementos del formulario de login
+// Elementos del formulario de login
 const formulario = document.getElementById('formularioLogin');
 const inputUsuario = document.getElementById('usuario');
 const inputContrasena = document.getElementById('contrasena');
 const mensajeError = document.getElementById('mensajeLogin');
 const botonSubmit = document.querySelector('.boton-login');
 
-// Evento submit para capturar el intento de inicio de sesión
+// Validar credenciales al enviar el formulario
 if (formulario) {
   formulario.addEventListener('submit', function (evento) {
     evento.preventDefault();
@@ -13,15 +13,19 @@ if (formulario) {
     const user = inputUsuario.value.trim();
     const pass = inputContrasena.value.trim();
 
-    // Consultamos la lista de usuarios guardados en localStorage desde registro.html
+    // Usuarios registrados en localStorage
     const usuariosRegistrados = JSON.parse(localStorage.getItem('usuarios')) || [];
 
-    // Buscamos si coincide con algún usuario registrado
-    const usuarioEncontrado = usuariosRegistrados.find(function (u) {
-      return (u.nombre === user || u.documento === user || u.correo === user) && u.contrasena === pass;
-    });
+    // Buscar coincidencia en la lista de registrados
+    let usuarioEncontrado = null;
+    for (let u of usuariosRegistrados) {
+      if ((u.nombre === user || u.documento === user || u.correo === user) && u.contrasena === pass) {
+        usuarioEncontrado = u;
+        break;
+      }
+    }
 
-    // 1. Caso Docente / Administrador: acceso directo al módulo de calificaciones
+    // 1. Docente o Admin -> acceso al panel de seguimiento
     if ((user === "admin" && pass === "123") || (user === "docente" && pass === "1234")) {
       const docenteActivo = {
         nombre: user === "docente" ? "Profesor Diego" : "Administrador",
@@ -30,7 +34,7 @@ if (formulario) {
       localStorage.setItem('usuarioActivo', JSON.stringify(docenteActivo));
       ingresoDocente("seguimiento.html");
 
-    // 2. Caso Estudiante (cuenta por defecto o usuario creado en registro.html)
+    // 2. Estudiante -> aviso de plataforma en desarrollo
     } else if ((user === "estudiante" && pass === "estudiante123") || (usuarioEncontrado && usuarioEncontrado.rol === "aprendiz")) {
       const nombreEstudiante = usuarioEncontrado ? usuarioEncontrado.nombre : "Aprendiz";
       const estudianteActivo = {
@@ -40,14 +44,14 @@ if (formulario) {
       localStorage.setItem('usuarioActivo', JSON.stringify(estudianteActivo));
       avisoEstudiante(nombreEstudiante);
 
-    // 3. Credenciales incorrectas
+    // 3. Error en credenciales
     } else {
       mostrarError("Usuario o contraseña incorrectos.");
     }
   });
 }
 
-// Redirección al panel docente
+// Redireccionar al panel de seguimiento
 function ingresoDocente(urlDestino) {
   mensajeError.textContent = "";
   mensajeError.style.opacity = '0';
@@ -61,7 +65,7 @@ function ingresoDocente(urlDestino) {
   }, 1000);
 }
 
-// Notificación para estudiantes (plataforma estudiantil en construcción)
+// Mensaje temporal para estudiantes y redirección al index
 function avisoEstudiante(nombre) {
   mensajeError.style.color = "#1b5e20";
   mensajeError.style.fontWeight = "bold";
@@ -77,7 +81,7 @@ function avisoEstudiante(nombre) {
   }, 2500);
 }
 
-// Manejo de mensaje de error visual
+// Mostrar mensaje de error en pantalla
 function mostrarError(texto) {
   mensajeError.style.color = '#8b0000';
   mensajeError.style.fontWeight = 'bold';

@@ -1,4 +1,4 @@
-// NOTAS DEL EQUIPO: Arreglo de objetos con la información de los programas académicos
+// Información de los programas académicos
 const programas = [
   {
     id: 1,
@@ -23,13 +23,13 @@ const programas = [
   }
 ];
 
-// NOTAS DEL EQUIPO: Selectores para elementos interactivos del inicio
+// Elementos interactivos del inicio
 const btnExplorar = document.getElementById("btn-explorar");
 const contenedorProgramas = document.getElementById("programas");
 const contenedorDetalle = document.getElementById("detalle-programa");
 const tarjetas = document.querySelectorAll(".card");
 
-// NOTAS DEL EQUIPO: Evento click para scroll suave hacia la sección de saberes
+// Botón explorar para bajar a la sección de programas
 if (btnExplorar && contenedorProgramas) {
   btnExplorar.addEventListener("click", function (evento) {
     evento.preventDefault();
@@ -37,21 +37,27 @@ if (btnExplorar && contenedorProgramas) {
   });
 }
 
-// NOTAS DEL EQUIPO: Evento click en cada tarjeta para consultar y mostrar detalles en el DOM
-tarjetas.forEach(function (tarjeta) {
+// Asignar evento click a cada tarjeta de programa
+for (let tarjeta of tarjetas) {
   tarjeta.addEventListener("click", function () {
     const idSeleccionado = Number(tarjeta.getAttribute("data-id"));
-    const programaEncontrado = programas.find(function (programa) {
-      return programa.id === idSeleccionado;
-    });
+    let programaEncontrado = null;
+
+    // Buscar el programa seleccionado por su id
+    for (let programa of programas) {
+      if (programa.id === idSeleccionado) {
+        programaEncontrado = programa;
+        break;
+      }
+    }
 
     if (programaEncontrado) {
       mostrarDetalle(programaEncontrado);
     }
   });
-});
+}
 
-// NOTAS DEL EQUIPO: Renderizado dinámico del panel de detalles del curso
+// Mostrar panel con el detalle del programa
 function mostrarDetalle(programa) {
   contenedorDetalle.innerHTML = `
     <div class="panel-detalle">

@@ -81,7 +81,8 @@
           <input type="text" id="nueva-nota" placeholder="Nota" required />
           <input type="text" id="nueva-asistencia" placeholder="Asistencia" required />
 
-          <button type="submit" class="btn-añadir">Añadir</button>
+          <button type="submit" class="btn-añadir" id="btn-submit-estudiante">Añadir</button>
+          <button type="button" class="btn-añadir" id="btn-cancelar-edicion" style="display: none; background-color: #6e4a24;">Cancelar</button>
         </form>
       </div>
       <p></p>
@@ -92,6 +93,7 @@
           <span> Estado </span>
           <span> Nota </span>
           <span> Asistencia </span>
+          <span> Acciones </span>
         </div>
 
         <div id="contenedor-estudiantes">
