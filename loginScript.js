@@ -21,13 +21,13 @@ document.addEventListener('DOMContentLoaded', function() {
         const pass = inputContrasena.value.trim();
 
         // 3. Validaciones
-        if (user === "admin" && pass === "123") {
+        if (user === "docente" && pass === "1234") {
             // Reemplaza el enlace por la ruta real que hizo tu equipo para el admin
-            ingresoExitoso("https://enlace-de-tu-equipo.com/admin.html"); 
+            ingresoExitoso("docente.html"); 
 
         } else if (user === "estudiante" && pass === "estudiante123") {
             // Reemplaza el enlace por la ruta real para el estudiante
-            ingresoExitoso("https://enlace-de-tu-equipo.com/estudiante.html"); 
+            ingresoExitoso("#"); 
 
         } else {
             // 4. Fallo: mostramos el error y hacemos vibrar el botón
