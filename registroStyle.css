@@ -121,14 +121,6 @@ header {
   display: none;
 }
 
-/* Mensaje de registro exitoso */
-.mensaje-registro.exito {
-  display: block;
-  background-color: #c8e6c9;
-  color: #1b5e20;
-  border: 1px solid #81c784;
-}
-
 /* Mensaje de error en el registro */
 .mensaje-registro.error {
   display: block;

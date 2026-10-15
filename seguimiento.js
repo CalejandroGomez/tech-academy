@@ -67,7 +67,6 @@ function renderizarTabla() {
       if (btnCancelarEdicion) {
         btnCancelarEdicion.style.display = 'inline-block';
       }
-      inputNombre.focus();
     });
 
     // Botón para eliminar un estudiante

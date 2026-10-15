@@ -3,7 +3,6 @@ const formulario = document.getElementById('formularioLogin');
 const inputUsuario = document.getElementById('usuario');
 const inputContrasena = document.getElementById('contrasena');
 const mensajeError = document.getElementById('mensajeLogin');
-const botonSubmit = document.querySelector('.boton-login');
 
 // Validar credenciales al enviar el formulario
 if (formulario) {
@@ -53,43 +52,21 @@ if (formulario) {
 
 // Redireccionar al panel de seguimiento
 function ingresoDocente(urlDestino) {
-  mensajeError.textContent = "";
-  mensajeError.style.opacity = '0';
-
-  botonSubmit.textContent = "Accediendo al panel...";
-  botonSubmit.style.backgroundColor = "#2c1e11";
-  botonSubmit.style.pointerEvents = "none";
-
-  setTimeout(function () {
-    window.location.href = urlDestino;
-  }, 1000);
+  mensajeError.innerHTML = "";
+  alert("Acceso correcto. Redirigiendo al panel...");
+  window.location.href = urlDestino;
 }
 
 // Mensaje temporal para estudiantes y redirección al index
 function avisoEstudiante(nombre) {
-  mensajeError.style.color = "#1b5e20";
-  mensajeError.style.fontWeight = "bold";
-  mensajeError.style.opacity = '1';
-  mensajeError.textContent = `Bienvenido ${nombre}. La plataforma de estudiantes está en desarrollo para la siguiente entrega. Redirigiendo al inicio...`;
-
-  botonSubmit.textContent = "Portal en desarrollo...";
-  botonSubmit.style.backgroundColor = "#2c1e11";
-  botonSubmit.style.pointerEvents = "none";
-
-  setTimeout(function () {
-    window.location.href = "index.html";
-  }, 2500);
+  alert(`Bienvenido ${nombre}. La plataforma de estudiantes está en desarrollo para la siguiente entrega. Redirigiendo al inicio...`);
+  window.location.href = "index.html";
 }
 
 // Mostrar mensaje de error en pantalla
 function mostrarError(texto) {
   mensajeError.style.color = '#8b0000';
   mensajeError.style.fontWeight = 'bold';
-  mensajeError.textContent = texto;
+  mensajeError.innerHTML = texto;
   mensajeError.style.opacity = '1';
-
-  botonSubmit.classList.add('error-shake');
-  setTimeout(function () {
-    botonSubmit.classList.remove('error-shake');
-  }, 500);
 }

@@ -103,7 +103,6 @@ function renderizarCalificaciones() {
       if (btnCancelarDocente) {
         btnCancelarDocente.style.display = 'inline-block';
       }
-      inputNombre.focus();
     });
 
     // Eliminar fila de calificaciones

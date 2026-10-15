@@ -24,18 +24,23 @@ const programas = [
 ];
 
 // Elementos interactivos del inicio
+const btnProgramas = document.getElementById("btn-programa");
 const btnExplorar = document.getElementById("btn-explorar");
 const contenedorProgramas = document.getElementById("programas");
 const contenedorDetalle = document.getElementById("detalle-programa");
 const tarjetas = document.querySelectorAll(".card");
 
 // Botón explorar para bajar a la sección de programas
-if (btnExplorar && contenedorProgramas) {
   btnExplorar.addEventListener("click", function (evento) {
     evento.preventDefault();
     contenedorProgramas.scrollIntoView({ behavior: "smooth" });
   });
-}
+  btnProgramas.addEventListener("click", function (evento) {
+    evento.preventDefault();
+    contenedorProgramas.scrollIntoView({ behavior: "smooth" });
+  });
+
+
 
 // Asignar evento click a cada tarjeta de programa
 for (let tarjeta of tarjetas) {
