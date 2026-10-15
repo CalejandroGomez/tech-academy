@@ -13,8 +13,7 @@ El proyecto es un MVP funcional que aplica manipulación del DOM, captura de eve
 | Página de inicio | `index.html` + `app.js` | ✅ Funcional |
 | Registro de aprendices | `registro.html` + `registro.js` | ✅ Funcional |
 | Inicio de sesión | `login.html` + `loginScript.js` | ✅ Funcional |
-| Seguimiento / Panel Docente | `seguimiento.html` + `seguimiento.js` | ✅ Funcional |
-| Panel de notas docente | `docentes.html` + `docentes.js` | ✅ Funcional |
+| Panel de seguimiento | `seguimiento.html` + `seguimiento.js` | ✅ Funcional |
 | Plataforma de estudiantes | — | 🚧 Pendiente próxima entrega |
 
 > **Nota:** El inicio de sesión con rol de estudiante muestra un aviso de que la plataforma está en desarrollo. El acceso al panel de seguimiento está habilitado para docentes (`usuario: docente / contraseña: 1234` o `usuario: admin / contraseña: 123`).
@@ -59,13 +58,9 @@ tech-academy/
 ├── registro.html            # Formulario de registro de aprendices
 ├── registroStyle.css        # Estilos del registro
 ├── registro.js              # Lógica de registro con LocalStorage
-├── seguimiento.html         # Panel CRUD de calificaciones (docente)
+├── seguimiento.html         # Panel de seguimiento
 ├── seguimientostyle.css     # Estilos del panel de seguimiento
-├── seguimiento.js           # CRUD de estudiantes y notas
-├── docentes.html            # Vista alternativa del panel docente
-├── docentesstyle.css        # Estilos del panel docente
-├── docentes.js              # CRUD de calificaciones de docentes y cierre de sesión
-├── SUSTENTACION_JAVASCRIPT.md # Guía para sustentar la lógica y el DOM de los scripts
+├── seguimiento.js           # Lógica del panel de seguimiento
 └── README.md                # Este archivo
 ```
 
