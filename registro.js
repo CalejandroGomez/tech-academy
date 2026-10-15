@@ -21,7 +21,7 @@ formRegistro.addEventListener("submit", function (evento) {
   // Validar campos obligatorios
   if (!nombre || !documento || !correo || !telefono || !contrasena) {
     mensajeRegistro.innerHTML = "Por favor completa todos los campos.";
-    mensajeRegistro.className = "mensaje-registro error";
+    mensajeRegistro.setAttribute("class", "mensaje-registro error");
     return;
   }
 
