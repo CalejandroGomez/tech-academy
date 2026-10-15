@@ -1,4 +1,3 @@
-
 :root {
   --fondo-pergamino: #f4ecd8;
   --marron-oscuro: #4a3319;
@@ -11,7 +10,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Special Elite', cursive;
-   background-image: url("Images/BackgroundPaper.png");
+  background-image: url("Images/BackgroundPaper.png");
   color: var(--marron-oscuro);
   min-height: 100vh;
 }
@@ -97,11 +96,12 @@ nav .user-icon {
 
 /* Imagen lateral del docente */
 
-.docente{
-  align-self:end ;
+.docente {
+  align-self: end;
   margin-top: auto;
- 
+
 }
+
 /* Tamaño y posición de la imagen del docente */
 .docente img {
   width: 100%;
@@ -138,7 +138,7 @@ nav .user-icon {
   border: 2px solid var(--marron-oscuro);
   border-radius: 12px;
   text-align: center;
-  box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* Títulos de las estadísticas */
@@ -229,36 +229,9 @@ nav .user-icon {
   background-color: #6e4a24;
 }
 
-/* Información de contacto */
-
-footer {
-  background-color: #6e4a24; 
-  color: #ffffff;          
-  display: flex;
-  justify-content: space-between;
-  padding: 25px 50px;
-  margin-top: 40px;
-  border-top: 4px solid #4a3319;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-/* Títulos y texto de las columnas del pie de página */
-.footer-column h3 {
-  font-size: 1.1rem;
-  margin-bottom: 10px;
-  border-bottom: 2px solid #e6cd98; 
-  padding-bottom: 5px;
-  display: inline-block;
-}
-
-.footer-column p {
-  font-size: 0.9rem;
-  margin: 5px 0;
-}
-
 /* Campos del formulario de calificaciones */
-.formulario-registro input, .formulario-registro select {
+.formulario-registro input,
+.formulario-registro select {
   padding: 8px;
   border: 2px solid #4a3319;
   border-radius: 6px;
@@ -268,14 +241,16 @@ footer {
 }
 
 /* Botones para agregar y borrar filas */
-.btn-Borrar, .btn-añadir, .btn-borrar2 {
-  background-color: #b23b3b; 
-  color: white;              
-  border: 2px solid #4a3319; 
-  border-radius: 8px;      
+.btn-Borrar,
+.btn-añadir,
+.btn-borrar2 {
+  background-color: #b23b3b;
+  color: white;
+  border: 2px solid #4a3319;
+  border-radius: 8px;
   padding: 5px 12px;
   cursor: pointer;
-  font-family: 'Special Elite', cursive; 
+  font-family: 'Special Elite', cursive;
 }
 
 /* Botón para editar registros existentes */
@@ -295,5 +270,3 @@ footer {
 .btn-editar:hover {
   background-color: #6e4a24;
 }
-
-
