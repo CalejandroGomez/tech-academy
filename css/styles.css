@@ -1,0 +1,797 @@
+/* ── Variables de color del sitio ─────────────────────────── */
+:root {
+  --bg-color: #e6cd98;
+  --text-color: #201d18;
+  --red-line: #752b20;
+  --hero-band: #6b6e3faa;
+  --card-bg: #ae7f37aa;
+  --btn-bg: #3a2522;
+  --footer-bg: #804a3e;
+  --fondo-pergamino: #f4ecd8;
+  --marron-oscuro: #4a3319;
+  --tabla-bg: rgba(230, 205, 152, 0.85);
+}
+
+/* ── Reinicio de márgenes y medidas de los elementos ──────── */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ── Tipografía y fondo general ───────────────────────────── */
+body {
+  font-family: "Special Elite", cursive;
+  color: var(--text-color);
+  background-image: url("../Images/BackgroundPaper.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-color: #e9d6ab;
+}
+
+/* ============================================================
+   HEADER Y NAVEGACIÓN (comunes a todas las páginas)
+   ============================================================ */
+
+/* Tamaño del logo en el encabezado */
+.icono-pluma {
+  width: 120px;
+  margin-bottom: -15px;
+}
+
+/* Barra superior con logo y navegación */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 20px 20px -10px 70px;
+  border-bottom: 5px solid var(--red-line);
+}
+
+/* Grupo del logo y nombre de la academia */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-text {
+  font-size: 1.5rem;
+  line-height: 1;
+  margin: 0;
+}
+
+/* Distribución de los enlaces de navegación */
+nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-weight: bold;
+}
+
+/* Enlaces del menú principal */
+nav a {
+  text-decoration: none;
+  color: var(--text-color);
+  font-size: 1.1rem;
+  transition: color 0.2s, text-decoration 0.2s;
+}
+
+/* Estado de los enlaces al pasar el puntero */
+nav a:hover {
+  text-decoration: underline;
+  text-underline-offset: 6px;
+  color: var(--red-line);
+}
+
+/* Icono de usuario del encabezado */
+nav .user-icon {
+  width: 35px;
+}
+
+/* ============================================================
+   PÁGINA PRINCIPAL (index.html)
+   ============================================================ */
+
+/* Franja de bienvenida de la página inicial */
+.hero {
+  background-color: var(--hero-band);
+  text-align: center;
+  padding: 50px 20px;
+  margin-top: 40px;
+}
+
+/* Título de la bienvenida */
+.hero h2 {
+  font-size: 1.4rem;
+  margin-bottom: 25px;
+  font-weight: normal;
+}
+
+/* Botón de acceso al catálogo */
+.btn {
+  display: inline-block;
+  background-color: var(--btn-bg);
+  color: white;
+  padding: 10px 25px;
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  border: none;
+  font-family: "Special Elite", cursive;
+}
+
+/* Estado del botón del catálogo al pasar el puntero */
+.btn:hover {
+  background-color: #523530;
+}
+
+/* Tarjetas de programas disponibles */
+.features {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  padding: 60px 20px 30px;
+}
+
+.card {
+  background-color: var(--card-bg);
+  padding: 30px 20px;
+  border-radius: 12px;
+  width: 250px;
+  text-align: center;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+/* Estado de las tarjetas al pasar el puntero */
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 4px 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Nombre del programa dentro de cada tarjeta */
+.card p {
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+/* Panel que muestra los detalles del programa elegido */
+.panel-detalle {
+  max-width: 800px;
+  margin: 0 auto 50px auto;
+  padding: 25px 35px;
+  background-color: #f4e8c1;
+  border: 2px dashed var(--red-line);
+  border-radius: 12px;
+  box-shadow: 3px 3px 12px rgba(0, 0, 0, 0.15);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Título y texto del detalle del programa */
+.panel-detalle h3 {
+  color: var(--red-line);
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+}
+
+.panel-detalle p {
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+
+/* Duración y docente del programa */
+.panel-detalle .info-extra {
+  font-size: 0.9rem;
+  color: #4a3828;
+}
+
+/* Control para cerrar el detalle del programa */
+.cerrar-detalle {
+  float: right;
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  color: var(--red-line);
+}
+
+/* Entrada del panel de detalle */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Pie de página y datos de contacto */
+footer {
+  background-color: var(--footer-bg);
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  padding: 30px 60px;
+  margin-top: 20px;
+}
+
+/* Títulos y texto de las columnas del pie de página */
+.footer-column h3 {
+  font-size: 1rem;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #ffffff55;
+  padding-bottom: 5px;
+  display: inline-block;
+}
+
+.footer-column p {
+  font-size: 0.85rem;
+  margin-bottom: 5px;
+}
+
+/* ============================================================
+   PÁGINA DE LOGIN (login.html)
+   ============================================================ */
+
+/* Distribución general de la página de acceso */
+.pagina-login {
+  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Espaciado del encabezado en la página de acceso */
+.pagina-login header,
+.pagina-registro header {
+  padding: 0px 15px;
+}
+
+/* Columnas para ilustraciones y formulario */
+.contenido-login {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 340px 1fr;
+  align-items: center;
+  padding: 10px 20px 0px;
+  gap: 20px;
+  overflow: hidden;
+}
+
+/* Apariencia de la tarjeta de acceso */
+.tarjeta-login {
+  width: 340px;
+  max-width: 100%;
+  padding: 40px 45px;
+  border-radius: 40px;
+  background-color: var(--card-bg);
+  box-shadow: 3px 6px 20px rgba(0, 0, 0, 0.15);
+  z-index: 2;
+}
+
+/* Formulario de acceso */
+.formulario-login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Grupo de etiqueta e input */
+.grupo-campo {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+/* Etiquetas de usuario y contraseña */
+.grupo-campo label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+/* Campo de entrada y su icono */
+.campo-login {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.campo-login input {
+  width: 100%;
+  height: 38px;
+  padding: 8px 38px 8px 12px;
+  border: none;
+  border-radius: 6px;
+  background-color: #9fc79d;
+  color: var(--text-color);
+  font-family: "Special Elite", cursive;
+  font-size: 1rem;
+  transition: outline 0.2s;
+}
+
+/* Resaltado del campo seleccionado */
+.campo-login input:focus {
+  outline: 2px solid var(--red-line);
+}
+
+/* Iconos dentro de los campos */
+.icono-input {
+  position: absolute;
+  right: 10px;
+  font-size: 1.1rem;
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+/* Botón principal y enlaces del formulario */
+.boton-login {
+  margin-top: 10px;
+  margin-bottom: 15px;
+  padding: 9px 24px;
+  border: none;
+  border-radius: 10px;
+  background-color: var(--red-line);
+  color: white;
+  font-family: "Special Elite", cursive;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+/* Estados del botón de acceso */
+.boton-login:hover {
+  background-color: #521c15;
+  transform: scale(1.02);
+}
+
+.boton-login:active {
+  transform: scale(0.98);
+}
+
+/* Enlaces secundarios del formulario */
+.enlace-login {
+  margin-bottom: 8px;
+  color: var(--text-color);
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: color 0.2s, text-decoration 0.2s;
+}
+
+/* Estado de los enlaces al pasar el puntero */
+.enlace-login:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  color: var(--red-line);
+}
+
+/* Mensaje de validación del acceso */
+.mensaje-login {
+  min-height: 20px;
+  color: #8b0000;
+  font-size: 0.85rem;
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+/* Posición de la maga y la antorcha */
+.decoracion-login {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Ilustración de la aprendiz */
+.estudianteMujer {
+  width: 480px;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  align-self: flex-end;
+}
+
+/* Ilustración de la antorcha */
+.imagen-antorcha {
+  width: 200px;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  align-self: center;
+}
+
+/* Presentación del acceso en pantallas pequeñas */
+@media (max-width: 900px) {
+  .contenido-login {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    padding: 20px 15px;
+  }
+
+  /* Ocultar ilustraciones en pantallas pequeñas */
+  .decoracion-login {
+    display: none;
+  }
+}
+
+/* ============================================================
+   PÁGINA DE REGISTRO (registro.html)
+   ============================================================ */
+
+/* Distribución general de la página de registro */
+.pagina-registro {
+  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-height: 680px) {
+
+  /* Permitir desplazamiento cuando la pantalla es baja */
+  .pagina-registro {
+    height: auto;
+    overflow-y: auto;
+  }
+}
+
+/* Centrado de la tarjeta y ubicación de la ilustración */
+.contenido-registro {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding: 20px;
+  overflow: hidden;
+}
+
+/* Apariencia de la tarjeta de registro */
+.tarjeta-registro {
+  width: 360px;
+  max-width: 90%;
+  padding: 35px 40px;
+  border-radius: 40px;
+  background-color: var(--card-bg);
+  box-shadow: 3px 6px 20px rgba(0, 0, 0, 0.15);
+  z-index: 2;
+}
+
+/* Campos y botón del formulario */
+.formulario-registro {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Grupo de etiqueta e input */
+.grupo-registro {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 14px;
+}
+
+/* Etiquetas de los campos de registro */
+.grupo-registro label {
+  margin-bottom: 6px;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+/* Inputs de nombre, documento y datos de contacto */
+.grupo-registro input {
+  height: 38px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  background-color: #9fc79d;
+  color: var(--text-color);
+  font-family: "Special Elite", cursive;
+  font-size: 0.95rem;
+  transition: outline 0.2s;
+}
+
+/* Texto de ejemplo dentro de los campos */
+.grupo-registro input::placeholder {
+  color: #3f5e3e;
+  opacity: 0.8;
+}
+
+/* Resaltado del campo seleccionado */
+.grupo-registro input:focus {
+  outline: 2px solid var(--red-line);
+}
+
+/* Botón de envío del formulario */
+.boton-registro {
+  align-self: center;
+  margin-top: 15px;
+  padding: 10px 28px;
+  border: none;
+  border-radius: 10px;
+  background-color: var(--red-line);
+  color: white;
+  font-family: "Special Elite", cursive;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+/* Estados del botón de registro */
+.boton-registro:hover {
+  background-color: #521c15;
+  transform: scale(1.02);
+}
+
+.boton-registro:active {
+  transform: scale(0.98);
+}
+
+/* Mensajes de confirmación y validación */
+.mensaje-registro {
+  margin-top: 15px;
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 0.9rem;
+  display: none;
+}
+
+/* Mensaje de error en el registro */
+.mensaje-registro.error {
+  display: block;
+  background-color: #ffcdd2;
+  color: #b71c1c;
+  border: 1px solid #e57373;
+}
+
+/* Ilustración de apoyo al formulario */
+.decoracion-registro {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 1;
+  line-height: 0;
+}
+
+/* Ilustración del aprendiz */
+.estudianteHombre {
+  width: 530px;
+  max-width: 38vw;
+  max-height: calc(100vh - 120px);
+  height: auto;
+  object-fit: contain;
+  object-position: bottom right;
+  display: block;
+}
+
+@media (max-width: 850px) {
+
+  /* Tamaño de la ilustración en pantallas pequeñas */
+  .estudianteHombre {
+    opacity: 0.25;
+    max-width: 50vw;
+  }
+}
+
+/* ============================================================
+   PÁGINA DE SEGUIMIENTO (seguimiento.html)
+   – Usa las mismas variables y estilos base que las demás
+   ============================================================ */
+
+/* Distribución general de la página de seguimiento */
+.pagina-seguimiento {
+  min-height: 100vh;
+}
+
+/* Enlace para salir del panel */
+.enlace-panel {
+  padding: 8px 12px;
+  border: 1px solid var(--btn-bg);
+  border-radius: 6px;
+  background-color: var(--btn-bg);
+  color: white;
+}
+
+.enlace-panel:hover {
+  background-color: #523530;
+  text-decoration: none;
+  color: white;
+}
+
+/* Distribución del panel de seguimiento */
+.contenido-seguimiento {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 30px;
+  padding: 40px;
+  max-width: 1400px;
+  margin: 0 auto;
+  align-items: end;
+}
+
+/* Imagen lateral del docente */
+.docente {
+  align-self: end;
+  margin-top: auto;
+}
+
+/* Tamaño y posición de la imagen del docente */
+.docente img {
+  width: 100%;
+  max-width: 280px;
+  display: block;
+  transform: translateY(80px);
+}
+
+/* Datos generales del curso */
+.panel-seguimiento {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Nombre de la materia */
+.datos-curso {
+  font-size: 1.4rem;
+  margin-bottom: 20px;
+}
+
+/* Indicadores académicos */
+.indicadores {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+/* Tarjetas con estadísticas del curso */
+.indicador {
+  padding: 20px;
+  background-color: var(--bg-color);
+  border: 2px solid var(--red-line);
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Títulos de las estadísticas */
+.indicador h3 {
+  margin: 0 0 10px 0;
+  font-size: 1rem;
+}
+
+/* Valores destacados de las estadísticas */
+.indicador strong {
+  font-size: 2.2rem;
+  display: block;
+}
+
+/* Estados de entrega dentro de la tarjeta */
+.indicador p {
+  margin: 4px 0;
+  font-size: 0.9rem;
+}
+
+/* Búsqueda de estudiantes */
+.buscador-seguimiento {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 0;
+  padding: 10px 20px;
+  background-color: var(--bg-color);
+  border: 2px solid var(--red-line);
+  border-radius: 30px;
+  width: fit-content;
+}
+
+/* Campo de búsqueda de estudiantes */
+.buscador-seguimiento input {
+  padding: 6px 12px;
+  border: 1px solid var(--red-line);
+  border-radius: 8px;
+  font-family: "Special Elite", cursive;
+}
+
+/* Filas de estudiantes */
+.tabla-seguimiento {
+  background-color: var(--tabla-bg);
+  border: 3px solid var(--red-line);
+  border-radius: 15px;
+  padding: 10px;
+}
+
+/* Distribución de las columnas de la tabla */
+.fila {
+  display: grid;
+  grid-template-columns: 2fr 1.2fr 0.8fr 1fr 1.6fr;
+  padding: 12px 10px;
+  align-items: center;
+  border-bottom: 2px solid rgba(117, 43, 32, 0.3);
+}
+
+/* Encabezado de la tabla de seguimiento */
+.tabla-encabezado {
+  font-weight: bold;
+  font-size: 1.1rem;
+  border-bottom: 3px solid var(--red-line);
+}
+
+/* Última fila de la tabla */
+.fila:last-child {
+  border-bottom: none;
+}
+
+/* Botón para guardar los cambios */
+.boton-guardar {
+  margin-top: 25px;
+  padding: 12px 35px;
+  background-color: var(--btn-bg);
+  color: white;
+  border: none;
+  border-radius: 25px;
+  font-family: "Special Elite", cursive;
+  font-size: 1.1rem;
+  cursor: pointer;
+  align-self: flex-end;
+  transition: background 0.2s;
+}
+
+/* Estado del botón guardar al pasar el puntero */
+.boton-guardar:hover {
+  background-color: #523530;
+}
+
+/* Formulario de calificaciones en seguimiento (tarjeta-modulo) */
+.tarjeta-modulo input,
+.tarjeta-modulo select {
+  padding: 8px;
+  border: 2px solid var(--red-line);
+  border-radius: 6px;
+  font-family: "Special Elite", cursive;
+  background-color: #fcf8f0;
+  color: var(--text-color);
+}
+
+/* Botones para agregar y borrar filas */
+.btn-Borrar,
+.btn-añadir,
+.btn-borrar2 {
+  background-color: #b23b3b;
+  color: white;
+  border: 2px solid var(--red-line);
+  border-radius: 8px;
+  padding: 5px 12px;
+  cursor: pointer;
+  font-family: "Special Elite", cursive;
+}
+
+/* Botón para editar registros existentes */
+.btn-editar {
+  background-color: var(--btn-bg);
+  color: white;
+  border: 2px solid var(--btn-bg);
+  border-radius: 8px;
+  padding: 5px 10px;
+  margin-right: 6px;
+  cursor: pointer;
+  font-family: "Special Elite", cursive;
+  font-size: 0.9rem;
+  transition: background-color 0.2s;
+}
+
+.btn-editar:hover {
+  background-color: #523530;
+}
