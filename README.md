@@ -10,10 +10,10 @@ El proyecto es un MVP funcional que aplica manipulación del DOM, captura de eve
 
 | Módulo | Archivo | Estado |
 |---|---|---|
-| Página de inicio | `index.html` + `app.js` | ✅ Funcional |
-| Registro de aprendices | `registro.html` + `registro.js` | ✅ Funcional |
-| Inicio de sesión | `login.html` + `loginScript.js` | ✅ Funcional |
-| Panel de seguimiento | `seguimiento.html` + `seguimiento.js` | ✅ Funcional |
+| Página de inicio | `index.html` + `js/main.js` | ✅ Funcional |
+| Registro de aprendices | `registro.html` + `js/registro.js` | ✅ Funcional |
+| Inicio de sesión | `login.html` + `js/login.js` | ✅ Funcional |
+| Panel de seguimiento | `seguimiento.html` + `js/seguimiento.js` | ✅ Funcional |
 | Plataforma de estudiantes | — | 🚧 Pendiente próxima entrega |
 
 > **Nota:** El inicio de sesión con rol de estudiante muestra un aviso de que la plataforma está en desarrollo. El acceso al panel de seguimiento está habilitado para docentes (`usuario: docente / contraseña: 1234` o `usuario: admin / contraseña: 123`).
@@ -23,7 +23,7 @@ El proyecto es un MVP funcional que aplica manipulación del DOM, captura de eve
 ## Tecnologías usadas
 
 - **HTML5** — estructura semántica
-- **CSS3** — Flexbox, Grid, variables CSS, transiciones
+- **CSS3** — Flexbox, Grid, variables CSS, transiciones (hoja de estilos unificada en `css/styles.css`)
 - **JavaScript Vanilla** — DOM, eventos, arreglos de objetos, `localStorage`
 - Tipografía: `Special Elite` (Google Fonts)
 
@@ -46,22 +46,21 @@ No se usaron frameworks ni librerías externas. Todo el código JavaScript sigue
 
 ```
 tech-academy/
-├── Images/                  # Imágenes, logos, personajes
+├── css/
+│   └── styles.css           # Estilos unificados y consistentes de toda la plataforma
+├── js/
+│   ├── main.js              # Lógica e interacción del catálogo en la página principal
+│   ├── login.js             # Validación de credenciales y redirección por roles
+│   ├── registro.js          # Captura de datos y registro con localStorage
+│   └── seguimiento.js       # Gestión de notas, métricas y filtros del docente
+├── Images/                  # Imágenes, fondos, iconos y personajes
 ├── mockup/                  # Capturas de referencia visual del diseño
-├── .gitignore               # Excluye carpeta local curso/ y archivos privados
+├── .gitignore               # Excluye carpetas locales y archivos privados
 ├── index.html               # Página de inicio con catálogo interactivo
-├── style.css                # Estilos globales compartidos
-├── app.js                   # Lógica de la página de inicio
 ├── login.html               # Pantalla de inicio de sesión
-├── loginStyle.css           # Estilos del login
-├── loginScript.js           # Validación de acceso por rol
 ├── registro.html            # Formulario de registro de aprendices
-├── registroStyle.css        # Estilos del registro
-├── registro.js              # Lógica de registro con LocalStorage
-├── seguimiento.html         # Panel de seguimiento
-├── seguimientostyle.css     # Estilos del panel de seguimiento
-├── seguimiento.js           # Lógica del panel de seguimiento
-└── README.md                # Este archivo
+├── seguimiento.html         # Panel de seguimiento académico docente
+└── README.md                # Documentación del proyecto
 ```
 
 ---
