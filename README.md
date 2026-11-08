@@ -2,7 +2,7 @@
 
 Plataforma web educativa desarrollada en **FrontEnd 1 - CESDE (2026-2)**.
 
-El proyecto es un MVP funcional que aplica manipulación del DOM, captura de eventos, arreglos de objetos y persistencia con `localStorage`, tal como se vio en clase con el docente Diego Giraldo Zapata.
+El proyecto es un MVP funcional que aplica manipulación del DOM, captura de eventos, arreglos de objetos, temporizadores (`setTimeout`), contadores dinámicos, listas con checkboxes y persistencia con `localStorage`, tal como se vio en clase con el docente Diego Giraldo Zapata.
 
 ---
 
@@ -13,10 +13,8 @@ El proyecto es un MVP funcional que aplica manipulación del DOM, captura de eve
 | Página de inicio | `index.html` + `js/main.js` | ✅ Funcional |
 | Registro de aprendices | `registro.html` + `js/registro.js` | ✅ Funcional |
 | Inicio de sesión | `login.html` + `js/login.js` | ✅ Funcional |
-| Panel de seguimiento | `seguimiento.html` + `js/seguimiento.js` | ✅ Funcional |
-| Plataforma de estudiantes | — | 🚧 Pendiente próxima entrega |
-
-> **Nota:** El inicio de sesión con rol de estudiante muestra un aviso de que la plataforma está en desarrollo. El acceso al panel de seguimiento está habilitado para docentes (`usuario: docente / contraseña: 1234` o `usuario: admin / contraseña: 123`).
+| Dashboard Profesor | `dashBoardProfesor.html` + `js/dashBoardProfesor.js` | ✅ Funcional |
+| Dashboard Alumno | `dashBoardAlumno.html` + `js/dashBoardAlumno.js` | ✅ Funcional |
 
 ---
 
@@ -24,21 +22,24 @@ El proyecto es un MVP funcional que aplica manipulación del DOM, captura de eve
 
 - **HTML5** — estructura semántica
 - **CSS3** — Flexbox, Grid, variables CSS, transiciones (hoja de estilos unificada en `css/styles.css`)
-- **JavaScript Vanilla** — DOM, eventos, arreglos de objetos, `localStorage`
+- **JavaScript Vanilla** — DOM, eventos, arreglos de objetos, `setTimeout`, `localStorage`
 - Tipografía: `Special Elite` (Google Fonts)
 
-No se usaron frameworks ni librerías externas. Todo el código JavaScript sigue los conceptos vistos en las sesiones S7 a S12 del curso.
+No se usaron frameworks ni librerías externas. Todo el código JavaScript sigue los conceptos vistos en las sesiones del curso (`todo`, `Contador` y `ejemploLocalStorage`).
 
 ---
 
 ## Credenciales de prueba
 
-| Rol | Usuario | Contraseña | Destino |
+| Rol | Usuario (o Documento) | Contraseña | Destino |
 |---|---|---|---|
-| Docente | `docente` | `1234` | `seguimiento.html` |
-| Admin | `admin` | `123` | `seguimiento.html` |
-| Estudiante | `estudiante` | `estudiante123` | Aviso + inicio |
-| Aprendiz registrado | correo o nombre del registro | contraseña usada en registro | Aviso + inicio |
+| Docente | `docente` | `1234` | `dashBoardProfesor.html` |
+| Admin | `admin` | `123` | `dashBoardProfesor.html` |
+| Estudiante 1 (Mariana Gómez) | `mariana` (o `1001`) | `1234` | `dashBoardAlumno.html` |
+| Estudiante 2 (Carlos Restrepo) | `carlos` (o `1002`) | `1234` | `dashBoardAlumno.html` |
+| Estudiante 3 (Luisa Fernández) | `luisa` (o `1003`) | `1234` | `dashBoardAlumno.html` |
+| Estudiante 4 (Sebastián Ramírez) | `sebastian` (o `1004`) | `1234` | `dashBoardAlumno.html` |
+| Estudiante 5 (Juan Camilo Montoya) | `juan` (o `1005`) | `1234` | `dashBoardAlumno.html` |
 
 ---
 
@@ -47,20 +48,22 @@ No se usaron frameworks ni librerías externas. Todo el código JavaScript sigue
 ```
 tech-academy/
 ├── css/
-│   └── styles.css           # Estilos unificados y consistentes de toda la plataforma
+│   └── styles.css              # Estilos unificados y consistentes de toda la plataforma
 ├── js/
-│   ├── main.js              # Lógica e interacción del catálogo en la página principal
-│   ├── login.js             # Validación de credenciales y redirección por roles
-│   ├── registro.js          # Captura de datos y registro con localStorage
-│   └── seguimiento.js       # Gestión de notas, métricas y filtros del docente
-├── Images/                  # Imágenes, fondos, iconos y personajes
-├── mockup/                  # Capturas de referencia visual del diseño
-├── .gitignore               # Excluye carpetas locales y archivos privados
-├── index.html               # Página de inicio con catálogo interactivo
-├── login.html               # Pantalla de inicio de sesión
-├── registro.html            # Formulario de registro de aprendices
-├── seguimiento.html         # Panel de seguimiento académico docente
-└── README.md                # Documentación del proyecto
+│   ├── main.js                 # Lógica e interacción del catálogo en la página principal
+│   ├── login.js                # Validación de credenciales, espera con setTimeout y redirección
+│   ├── registro.js             # Captura de datos y registro sincronizado con localStorage
+│   ├── dashBoardProfesor.js    # Gestión separada de calificaciones, asistencias por sesión y KPIs
+│   └── dashBoardAlumno.js      # Consulta de notas, asistencia y lista de compromisos (To-Do)
+├── Images/                     # Imágenes, fondos, iconos y personajes
+├── mockup/                     # Capturas de referencia visual del diseño
+├── .gitignore                  # Excluye carpetas locales y archivos privados
+├── index.html                  # Página de inicio con catálogo interactivo
+├── login.html                  # Pantalla de inicio de sesión
+├── registro.html               # Formulario de registro de aprendices
+├── dashBoardProfesor.html      # Panel académico del profesor (Notas y Asistencia separadas)
+├── dashBoardAlumno.html        # Panel académico del estudiante
+└── README.md                   # Documentación del proyecto
 ```
 
 ---
