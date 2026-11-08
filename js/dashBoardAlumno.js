@@ -1,8 +1,3 @@
-// ============================================================
-// DASHBOARD ALUMNO - Consulta personal de Calificaciones
-// y Asistencia (DOM, Eventos y LocalStorage)
-// ============================================================
-
 // Referencias del encabezado del aprendiz
 const saludoAlumno = document.getElementById("saludo-alumno");
 const btnSalirAlumno = document.getElementById("btn-salir-alumno");

@@ -64,84 +64,12 @@ const asistenciasPorDefecto = [
   { nombre: "Juan Camilo Montoya", fecha: "2026-11-08", presenteHoy: true, asistidas: 16, totales: 20 }
 ];
 
-// Limpiar datos antiguos de pruebas ("Tavo", "juan", "Profesor Diego") y asegurar los 5 estudiantes
-function cargarYLimpiarDatos() {
-  const nombresExcluidos = ["tavo", "juan", "profesor diego", "administrador", "docente", "admin"];
+// Cargar listas desde localStorage o usar las listas por defecto
+let listaCalificaciones =
+  JSON.parse(localStorage.getItem("calificaciones_academicas")) || calificacionesPorDefecto;
 
-  let calificacionesGuardadas = JSON.parse(localStorage.getItem("calificaciones_academicas"));
-  let asistenciasGuardadas = JSON.parse(localStorage.getItem("asistencias_academicas"));
-
-  if (!calificacionesGuardadas || calificacionesGuardadas.length === 0) {
-    calificacionesGuardadas = [...calificacionesPorDefecto];
-  } else {
-    // Filtrar nombres excluidos
-    const filtradas = [];
-    for (let item of calificacionesGuardadas) {
-      if (item && item.nombre && !nombresExcluidos.includes(item.nombre.trim().toLowerCase())) {
-        filtradas.push(item);
-      }
-    }
-    // Asegurar que estén los 5 estudiantes base
-    for (let base of calificacionesPorDefecto) {
-      let existe = false;
-      for (let item of filtradas) {
-        if (item.nombre.toLowerCase() === base.nombre.toLowerCase()) {
-          existe = true;
-          break;
-        }
-      }
-      if (!existe) {
-        filtradas.push(base);
-      }
-    }
-    calificacionesGuardadas = filtradas;
-  }
-
-  if (!asistenciasGuardadas || asistenciasGuardadas.length === 0) {
-    asistenciasGuardadas = [...asistenciasPorDefecto];
-  } else {
-    // Filtrar nombres excluidos
-    const filtradasAsist = [];
-    for (let item of asistenciasGuardadas) {
-      if (item && item.nombre && !nombresExcluidos.includes(item.nombre.trim().toLowerCase())) {
-        filtradasAsist.push(item);
-      }
-    }
-    // Asegurar que estén los 5 estudiantes base
-    for (let base of asistenciasPorDefecto) {
-      let existe = false;
-      for (let item of filtradasAsist) {
-        if (item.nombre.toLowerCase() === base.nombre.toLowerCase()) {
-          existe = true;
-          break;
-        }
-      }
-      if (!existe) {
-        filtradasAsist.push(base);
-      }
-    }
-    asistenciasGuardadas = filtradasAsist;
-  }
-
-  // Limpiar también la clave 'usuarios' de registros antiguos como Tavo, juan o Profesor Diego
-  const usuariosGuardados = JSON.parse(localStorage.getItem("usuarios")) || [];
-  const usuariosLimpios = [];
-  for (let u of usuariosGuardados) {
-    if (u && u.nombre && !nombresExcluidos.includes(u.nombre.trim().toLowerCase())) {
-      usuariosLimpios.push(u);
-    }
-  }
-  localStorage.setItem("usuarios", JSON.stringify(usuariosLimpios));
-
-  return {
-    calificaciones: calificacionesGuardadas,
-    asistencias: asistenciasGuardadas
-  };
-}
-
-const datosIniciales = cargarYLimpiarDatos();
-let listaCalificaciones = datosIniciales.calificaciones;
-let listaAsistencias = datosIniciales.asistencias;
+let listaAsistencias =
+  JSON.parse(localStorage.getItem("asistencias_academicas")) || asistenciasPorDefecto;
 
 // Mostrar nombre del docente que inició sesión
 function mostrarUsuarioActivo() {
