@@ -5,7 +5,7 @@ const inputContrasena = document.getElementById("contrasena");
 const mensajeLogin = document.getElementById("mensajeLogin");
 const botonLogin = document.querySelector(".boton-login");
 
-// Los 5 estudiantes base del curso (mismos que aparecen en el dashboard del profesor)
+// Los 5 estudiantes por defecto del curso
 const estudiantesBase = [
   {
     nombre: "Mariana Gómez",
@@ -54,40 +54,15 @@ const estudiantesBase = [
   }
 ];
 
-// Inicializar y limpiar la lista de usuarios en localStorage para garantizar los 5 estudiantes
-function inicializarUsuariosBase() {
-  const guardados = JSON.parse(localStorage.getItem("usuarios")) || [];
-  const nombresNoPermitidos = ["tavo", "juan", "profesor diego", "administrador", "docente", "admin"];
-
-  // Empezar con los 5 estudiantes base
-  const listaLimpia = [...estudiantesBase];
-
-  // Conservar aprendices adicionales válidos que no sean los registros de prueba descartados
-  for (let u of guardados) {
-    if (!u || !u.nombre) continue;
-    const nombreMin = u.nombre.trim().toLowerCase();
-    if (nombresNoPermitidos.includes(nombreMin)) continue;
-
-    let yaExiste = false;
-    for (let base of listaLimpia) {
-      if (base.nombre.toLowerCase() === nombreMin) {
-        yaExiste = true;
-        break;
-      }
-    }
-    if (!yaExiste && u.rol === "aprendiz") {
-      listaLimpia.push(u);
-    }
-  }
-
-  localStorage.setItem("usuarios", JSON.stringify(listaLimpia));
-  return listaLimpia;
+// Cargar usuarios desde localStorage o guardar los 5 estudiantes por defecto
+let usuariosRegistrados = JSON.parse(localStorage.getItem("usuarios"));
+if (!usuariosRegistrados) {
+  usuariosRegistrados = estudiantesBase;
+  localStorage.setItem("usuarios", JSON.stringify(usuariosRegistrados));
 }
 
 // Validar credenciales al enviar el formulario
 if (formulario) {
-  const listaUsuarios = inicializarUsuariosBase();
-
   formulario.addEventListener("submit", function (evento) {
     evento.preventDefault();
 
@@ -116,8 +91,8 @@ if (formulario) {
       return;
     }
 
-    // 2. Buscar en la lista de los 5 estudiantes (o aprendices registrados)
-    const usuariosRegistrados = JSON.parse(localStorage.getItem("usuarios")) || listaUsuarios;
+    // 2. Buscar coincidencia en la lista de estudiantes
+    usuariosRegistrados = JSON.parse(localStorage.getItem("usuarios")) || estudiantesBase;
     let estudianteEncontrado = null;
 
     for (let u of usuariosRegistrados) {
