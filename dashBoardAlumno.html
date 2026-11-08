@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard Alumno - Tech Academy</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet" />
+</head>
+
+<body class="pagina-seguimiento">
+
+  <header>
+    <div class="logo">
+      <img src="Images/Logo.png" alt="Logo Tech Academy" class="icono-pluma" />
+      <div class="logo-text">
+        <h1>TECH</h1>
+        <h1>ACADEMY</h1>
+      </div>
+    </div>
+    <nav>
+      <span id="saludo-alumno" class="saludo-usuario">Aprendiz</span>
+      <a href="index.html">Inicio</a>
+      <a class="enlace-panel" href="login.html" id="btn-salir-alumno">Salir</a>
+      <img src="Images/UserShield.png" alt="Usuario" class="user-icon" />
+    </nav>
+  </header>
+
+  <main class="contenido-seguimiento contenido-alumno">
+    <aside class="docente alumno-ilustracion">
+      <img src="Images/estudianteD.png" alt="Aprendiz Tech Academy" />
+    </aside>
+
+    <section class="panel-seguimiento">
+
+      <div class="datos-curso">
+        <p>Aprendiz: <strong id="nombre-expediente">Mariana Gómez</strong></p>
+        <p>Materia: <strong>Metodologías Ágiles</strong></p>
+      </div>
+
+      <!-- Indicadores personales del estudiante -->
+      <section class="indicadores">
+        <div class="indicador">
+          <h3>MI PROMEDIO</h3>
+          <strong id="alumno-promedio">0.0</strong>
+          <p id="alumno-concepto-nota">Escala: 0.0 a 5.0</p>
+        </div>
+
+        <div class="indicador">
+          <h3>MI ENTREGA</h3>
+          <strong id="alumno-estado-entrega" class="texto-indicador-mediano">Pendiente</strong>
+          <p>Proyecto del módulo</p>
+        </div>
+
+        <div class="indicador">
+          <h3>MI ASISTENCIA</h3>
+          <strong id="alumno-porcentaje-asistencia">0%</strong>
+          <p id="alumno-detalle-sesiones">0 de 0 sesiones</p>
+        </div>
+      </section>
+
+      <!-- Pestañas de navegación del alumno -->
+      <div class="barra-herramientas-panel">
+        <div class="pestanas-modulos">
+          <button type="button" class="btn-pestana activa" id="tab-alumno-notas">Mis Calificaciones</button>
+          <button type="button" class="btn-pestana" id="tab-alumno-asistencia">Mi Asistencia</button>
+          <button type="button" class="btn-pestana" id="tab-alumno-todo">Ver Ambos</button>
+        </div>
+      </div>
+
+      <!-- ========================================================
+           SECCIÓN 1: MIS CALIFICACIONES (Solo lectura)
+           ======================================================== -->
+      <div id="seccion-alumno-notas" class="bloque-modulo">
+        <div class="tarjeta-modulo">
+          <h3>Detalle de Mis Calificaciones</h3>
+          <p class="descripcion-modulo">
+            Consulta tus notas registradas por el docente en cada momento evaluativo y el estado de tu entregable.
+          </p>
+        </div>
+
+        <section class="tabla-seguimiento">
+          <div class="fila fila-alumno-notas tabla-encabezado">
+            <span>Momento Evaluativo</span>
+            <span>Estado de Entrega</span>
+            <span>Calificación</span>
+            <span>Valoración</span>
+          </div>
+
+          <div id="contenedor-notas-alumno"></div>
+        </section>
+      </div>
+
+      <!-- ========================================================
+           SECCIÓN 2: MI HISTORIAL DE ASISTENCIA (Solo lectura)
+           ======================================================== -->
+      <div id="seccion-alumno-asistencia" class="bloque-modulo" style="display: none;">
+        <div class="tarjeta-modulo">
+          <h3>Reporte de Mi Asistencia</h3>
+          <p class="descripcion-modulo">
+            Recuerda que para aprobar el módulo en Tech Academy se requiere un mínimo de <strong>75%</strong> de asistencia.
+          </p>
+        </div>
+
+        <section class="tabla-seguimiento">
+          <div class="fila fila-alumno-asistencia tabla-encabezado">
+            <span>Última Sesión</span>
+            <span>Estado Hoy</span>
+            <span>Clases Asistidas</span>
+            <span>Total Sesiones</span>
+            <span>% Acumulado</span>
+          </div>
+
+          <div id="contenedor-asistencia-alumno"></div>
+        </section>
+      </div>
+
+    </section>
+  </main>
+
+  <script src="js/dashBoardAlumno.js"></script>
+</body>
+
+</html>

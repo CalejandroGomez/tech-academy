@@ -556,6 +556,15 @@ footer {
   border: 1px solid #e57373;
 }
 
+/* Mensaje de éxito en el registro */
+.mensaje-registro.exito {
+  display: block;
+  background-color: #d7ecd9;
+  color: #1b4d20;
+  border: 1px solid #4caf50;
+  font-weight: bold;
+}
+
 /* Ilustración de apoyo al formulario */
 .decoracion-registro {
   position: absolute;
@@ -587,13 +596,21 @@ footer {
 }
 
 /* ============================================================
-   PÁGINA DE SEGUIMIENTO (seguimiento.html)
+   PANELES ACADÉMICOS (dashBoardProfesor.html y dashBoardAlumno.html)
    – Usa las mismas variables y estilos base que las demás
    ============================================================ */
 
-/* Distribución general de la página de seguimiento */
+/* Distribución general de los paneles */
 .pagina-seguimiento {
   min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.saludo-usuario {
+  font-size: 1rem;
+  color: var(--red-line);
+  padding: 4px 10px;
+  border-bottom: 2px dashed var(--red-line);
 }
 
 /* Enlace para salir del panel */
@@ -611,54 +628,101 @@ footer {
   color: white;
 }
 
-/* Distribución del panel de seguimiento */
+/* Distribución del panel */
 .contenido-seguimiento {
   display: grid;
-  grid-template-columns: 300px 1fr;
+  grid-template-columns: 290px 1fr;
   gap: 30px;
-  padding: 40px;
+  padding: 35px 40px;
   max-width: 1400px;
   margin: 0 auto;
-  align-items: end;
+  align-items: start;
 }
 
-/* Imagen lateral del docente */
+.contenido-alumno {
+  min-height: calc(100vh - 105px);
+}
+
+/* Imagen lateral del docente o estudiante */
 .docente {
   align-self: end;
   margin-top: auto;
 }
 
-/* Tamaño y posición de la imagen del docente */
+/* Tamaño y posición de la imagen lateral del profesor */
 .docente img {
   width: 100%;
   max-width: 280px;
   display: block;
-  transform: translateY(80px);
+  transform: translateY(40px);
 }
 
-/* Datos generales del curso */
+/* Tamaño y posición de la imagen del aprendiz (más grande y pegada abajo) */
+.alumno-ilustracion {
+  align-self: end;
+  margin-top: auto;
+  line-height: 0;
+}
+
+.alumno-ilustracion img {
+  width: 470px;
+  max-width: none;
+  margin-left: -75px;
+  display: block;
+  transform: translateY(35px);
+}
+
+/* Contenedor principal derecho */
 .panel-seguimiento {
   display: flex;
   flex-direction: column;
 }
 
-/* Nombre de la materia */
+/* Cabecera con datos generales del curso */
 .datos-curso {
-  font-size: 1.4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  font-size: 1.25rem;
   margin-bottom: 20px;
 }
 
-/* Indicadores académicos */
+.selector-expediente {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1rem;
+  background-color: var(--bg-color);
+  padding: 8px 14px;
+  border: 2px solid var(--red-line);
+  border-radius: 12px;
+}
+
+.selector-expediente select {
+  padding: 6px 10px;
+  border: 1px solid var(--red-line);
+  border-radius: 6px;
+  background-color: #fcf8f0;
+  font-family: "Special Elite", cursive;
+  color: var(--text-color);
+}
+
+/* Indicadores académicos (KPIs) */
 .indicadores {
   display: flex;
   justify-content: center;
-  gap: 20px;
-  margin-bottom: 30px;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-bottom: 25px;
 }
 
 /* Tarjetas con estadísticas del curso */
 .indicador {
-  padding: 20px;
+  flex: 1;
+  min-width: 180px;
+  padding: 18px 15px;
   background-color: var(--bg-color);
   border: 2px solid var(--red-line);
   border-radius: 12px;
@@ -668,29 +732,49 @@ footer {
 
 /* Títulos de las estadísticas */
 .indicador h3 {
-  margin: 0 0 10px 0;
-  font-size: 1rem;
+  margin: 0 0 8px 0;
+  font-size: 0.95rem;
 }
 
 /* Valores destacados de las estadísticas */
 .indicador strong {
-  font-size: 2.2rem;
+  font-size: 2rem;
   display: block;
+  margin-bottom: 4px;
+}
+
+.indicador strong.texto-indicador-mediano {
+  font-size: 1.45rem;
+  margin-top: 8px;
+}
+
+.indicador strong.numero-en-linea {
+  display: inline;
+  font-size: 1.1rem;
 }
 
 /* Estados de entrega dentro de la tarjeta */
 .indicador p {
   margin: 4px 0;
-  font-size: 0.9rem;
+  font-size: 0.88rem;
+}
+
+/* Barra con buscador y botones de pestañas */
+.barra-herramientas-panel {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 18px;
 }
 
 /* Búsqueda de estudiantes */
 .buscador-seguimiento {
   display: flex;
   align-items: center;
-  gap: 15px;
-  margin-bottom: 0;
-  padding: 10px 20px;
+  gap: 12px;
+  padding: 8px 18px;
   background-color: var(--bg-color);
   border: 2px solid var(--red-line);
   border-radius: 30px;
@@ -703,29 +787,133 @@ footer {
   border: 1px solid var(--red-line);
   border-radius: 8px;
   font-family: "Special Elite", cursive;
+  background-color: #fcf8f0;
 }
 
-/* Filas de estudiantes */
+/* Pestañas para cambiar entre Calificaciones y Asistencia */
+.pestanas-modulos {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.btn-pestana {
+  padding: 9px 16px;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  border: 2px solid var(--red-line);
+  border-radius: 10px;
+  font-family: "Special Elite", cursive;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.btn-pestana:hover {
+  background-color: #d4b87c;
+}
+
+.btn-pestana.activa {
+  background-color: var(--red-line);
+  color: white;
+}
+
+.bloque-modulo {
+  margin-bottom: 25px;
+}
+
+/* Tarjeta superior de formulario o encabezado de sección */
+.tarjeta-modulo {
+  background-color: var(--bg-color);
+  border: 2px solid var(--red-line);
+  border-radius: 15px;
+  padding: 16px 20px;
+  margin-bottom: 15px;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.tarjeta-modulo h3 {
+  margin-bottom: 12px;
+  font-size: 1.15rem;
+}
+
+.descripcion-modulo {
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.cabecera-asistencia {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.cabecera-asistencia h3 {
+  margin-bottom: 0;
+}
+
+.resumen-sesion-todo {
+  font-size: 0.95rem;
+  background-color: #fcf8f0;
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--red-line);
+}
+
+.form-en-linea {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.etiqueta-inline {
+  font-weight: bold;
+  font-size: 0.95rem;
+}
+
+/* Contenedor de tabla */
 .tabla-seguimiento {
   background-color: var(--tabla-bg);
   border: 3px solid var(--red-line);
   border-radius: 15px;
-  padding: 10px;
+  padding: 10px 14px;
 }
 
-/* Distribución de las columnas de la tabla */
+/* Distribución base de las filas */
 .fila {
   display: grid;
   grid-template-columns: 2fr 1.2fr 0.8fr 1fr 1.6fr;
   padding: 12px 10px;
   align-items: center;
   border-bottom: 2px solid rgba(117, 43, 32, 0.3);
+  gap: 8px;
 }
 
-/* Encabezado de la tabla de seguimiento */
+/* Columnas específicas para cada tabla */
+.fila-calificaciones {
+  grid-template-columns: 1.8fr 1.1fr 0.7fr 0.7fr 0.7fr 0.8fr 1.4fr;
+}
+
+.fila-asistencia {
+  grid-template-columns: 1.8fr 1.1fr 1.2fr 1.5fr 0.9fr 0.9fr;
+}
+
+.fila-alumno-notas {
+  grid-template-columns: 2.2fr 1.2fr 0.8fr 1.2fr;
+}
+
+.fila-alumno-asistencia {
+  grid-template-columns: 1.2fr 1fr 1.1fr 1.1fr 1.6fr;
+}
+
+/* Encabezado de la tabla */
 .tabla-encabezado {
   font-weight: bold;
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   border-bottom: 3px solid var(--red-line);
 }
 
@@ -734,18 +922,114 @@ footer {
   border-bottom: none;
 }
 
+/* Controles de checkbox y contador en la tabla de asistencia */
+.label-asistencia-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.check-asistencia-hoy {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: var(--red-line);
+}
+
+.control-contador-asistencia {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-contador {
+  width: 26px;
+  height: 26px;
+  border: 1px solid var(--red-line);
+  border-radius: 6px;
+  background-color: var(--btn-bg);
+  color: white;
+  font-family: "Special Elite", cursive;
+  font-size: 1rem;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.btn-contador:hover {
+  background-color: var(--red-line);
+}
+
+.numero-sesiones {
+  min-width: 62px;
+  text-align: center;
+}
+
+/* Lista de tareas en el panel del alumno (práctica Todo) */
+.lista-tareas-pergamino {
+  list-style: none;
+  padding: 5px;
+}
+
+.item-tarea-pergamino {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 8px;
+  border-bottom: 2px solid rgba(117, 43, 32, 0.25);
+}
+
+.item-tarea-pergamino:last-child {
+  border-bottom: none;
+}
+
+.label-tarea-alumno {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.label-tarea-alumno input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--red-line);
+  cursor: pointer;
+}
+
+#input-nueva-tarea {
+  flex: 1;
+  min-width: 240px;
+}
+
+/* Pie de acciones y mensaje de confirmación */
+.pie-acciones-panel {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.mensaje-panel {
+  font-weight: bold;
+  color: #1b4d20;
+  font-size: 0.95rem;
+  min-height: 22px;
+}
+
 /* Botón para guardar los cambios */
 .boton-guardar {
-  margin-top: 25px;
   padding: 12px 35px;
   background-color: var(--btn-bg);
   color: white;
   border: none;
   border-radius: 25px;
   font-family: "Special Elite", cursive;
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   cursor: pointer;
-  align-self: flex-end;
   transition: background 0.2s;
 }
 
@@ -754,15 +1038,19 @@ footer {
   background-color: #523530;
 }
 
-/* Formulario de calificaciones en seguimiento (tarjeta-modulo) */
+/* Formulario de calificaciones y asistencia (tarjeta-modulo) */
 .tarjeta-modulo input,
 .tarjeta-modulo select {
-  padding: 8px;
+  padding: 8px 10px;
   border: 2px solid var(--red-line);
   border-radius: 6px;
   font-family: "Special Elite", cursive;
   background-color: #fcf8f0;
   color: var(--text-color);
+}
+
+.tarjeta-modulo input[type="number"] {
+  width: 125px;
 }
 
 /* Botones para agregar y borrar filas */
@@ -773,9 +1061,13 @@ footer {
   color: white;
   border: 2px solid var(--red-line);
   border-radius: 8px;
-  padding: 5px 12px;
+  padding: 6px 12px;
   cursor: pointer;
   font-family: "Special Elite", cursive;
+}
+
+.btn-secundario {
+  background-color: #6e4a24;
 }
 
 /* Botón para editar registros existentes */
@@ -784,7 +1076,7 @@ footer {
   color: white;
   border: 2px solid var(--btn-bg);
   border-radius: 8px;
-  padding: 5px 10px;
+  padding: 6px 10px;
   margin-right: 6px;
   cursor: pointer;
   font-family: "Special Elite", cursive;
@@ -794,4 +1086,22 @@ footer {
 
 .btn-editar:hover {
   background-color: #523530;
+}
+
+@media (max-width: 980px) {
+  .contenido-seguimiento {
+    grid-template-columns: 1fr;
+    padding: 20px;
+  }
+
+  .docente {
+    display: none;
+  }
+
+  .fila-calificaciones,
+  .fila-asistencia,
+  .fila-alumno-notas,
+  .fila-alumno-asistencia {
+    font-size: 0.85rem;
+  }
 }
