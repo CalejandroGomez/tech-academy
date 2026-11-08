@@ -188,9 +188,9 @@ function mostrarAvisoPanel(texto) {
   }, 3000);
 }
 
-// ============================================================
-// RENDERIZADO DEL MÓDULO 1: TABLA DE CALIFICACIONES
-// ============================================================
+
+// TABLA DE CALIFICACIONES
+
 function renderizarTablaCalificaciones() {
   if (!contenedorEstudiantes) return;
   contenedorEstudiantes.innerHTML = "";
@@ -373,9 +373,9 @@ if (btnCancelarEdicion) {
   });
 }
 
-// ============================================================
-// RENDERIZADO DEL MÓDULO 2: CONTROL DE ASISTENCIA POR SESIÓN
-// ============================================================
+
+// CONTROL DE ASISTENCIA POR SESIÓN
+
 function renderizarTablaAsistencia() {
   if (!contenedorAsistencia) return;
   contenedorAsistencia.innerHTML = "";
@@ -603,9 +603,9 @@ if (btnNuevaSesion) {
   });
 }
 
-// ============================================================
-// ACTUALIZACIÓN AUTOMÁTICA DE INDICADORES DEL CURSO (KPIs)
-// ============================================================
+
+// ACTUALIZACIÓN AUTOMÁTICA DE INDICADORES GENERALES (KPIs) EN EL PANEL
+
 function actualizarIndicadoresGenerales() {
   let sumaPromedios = 0;
   let entregados = 0;
@@ -671,9 +671,9 @@ function actualizarIndicadoresGenerales() {
   }
 }
 
-// ============================================================
+
 // BUSCADOR EN TIEMPO REAL Y NAVEGACIÓN ENTRE PESTAÑAS
-// ============================================================
+
 function aplicarFiltroBusqueda() {
   if (!inputBuscar) return;
   const filtro = inputBuscar.value.toLowerCase().trim();

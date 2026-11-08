@@ -1,3 +1,8 @@
+// ============================================================
+// DASHBOARD ALUMNO - Consulta personal de Calificaciones
+// y Asistencia (DOM, Eventos y LocalStorage)
+// ============================================================
+
 // Referencias del encabezado del aprendiz
 const saludoAlumno = document.getElementById("saludo-alumno");
 const btnSalirAlumno = document.getElementById("btn-salir-alumno");
@@ -39,52 +44,20 @@ const asistenciasPorDefecto = [
   { nombre: "Juan Camilo Montoya", fecha: "2026-11-08", presenteHoy: true, asistidas: 16, totales: 20 }
 ];
 
-// Cargar listas desde localStorage y limpiar registros inválidos
-const nombresExcluidos = ["tavo", "juan", "profesor diego", "administrador", "docente", "admin"];
+// Cargar listas desde localStorage o usar las listas por defecto
+let listaCalificaciones =
+  JSON.parse(localStorage.getItem("calificaciones_academicas")) || calificacionesPorDefecto;
 
-function obtenerListaLimpia(clave, porDefecto) {
-  let guardada = JSON.parse(localStorage.getItem(clave));
-  if (!guardada || guardada.length === 0) {
-    localStorage.setItem(clave, JSON.stringify(porDefecto));
-    return [...porDefecto];
-  }
-  const filtrada = [];
-  for (let item of guardada) {
-    if (item && item.nombre && !nombresExcluidos.includes(item.nombre.trim().toLowerCase())) {
-      filtrada.push(item);
-    }
-  }
-  for (let base of porDefecto) {
-    let existe = false;
-    for (let item of filtrada) {
-      if (item.nombre.toLowerCase() === base.nombre.toLowerCase()) {
-        existe = true;
-        break;
-      }
-    }
-    if (!existe) {
-      filtrada.push(base);
-    }
-  }
-  localStorage.setItem(clave, JSON.stringify(filtrada));
-  return filtrada;
-}
+let listaAsistencias =
+  JSON.parse(localStorage.getItem("asistencias_academicas")) || asistenciasPorDefecto;
 
-let listaCalificaciones = obtenerListaLimpia("calificaciones_academicas", calificacionesPorDefecto);
-let listaAsistencias = obtenerListaLimpia("asistencias_academicas", asistenciasPorDefecto);
-
-// Obtener el aprendiz que inició sesión (nunca mostrar "Profesor Diego" en el panel de alumno)
+// Obtener el aprendiz que inició sesión
 let usuarioGuardado = JSON.parse(localStorage.getItem("usuarioActivo"));
-if (
-  !usuarioGuardado ||
-  usuarioGuardado.rol !== "aprendiz" ||
-  nombresExcluidos.includes(usuarioGuardado.nombre.trim().toLowerCase())
-) {
+if (!usuarioGuardado || usuarioGuardado.rol !== "aprendiz") {
   usuarioGuardado = {
     nombre: "Mariana Gómez",
     rol: "aprendiz"
   };
-  localStorage.setItem("usuarioActivo", JSON.stringify(usuarioGuardado));
 }
 
 const estudianteActivo = usuarioGuardado.nombre;
@@ -153,7 +126,7 @@ function mostrarDatosEstudiante(nombreBuscar) {
     }
   }
 
-  // 1. Mostrar Calificaciones (Momento 1, Momento 2, Momento 3 y Promedio Definitivo)
+  // Mostrar Calificaciones (Momento 1, Momento 2, Momento 3 y Promedio Definitivo)
   if (datosNotas && contenedorNotasAlumno) {
     const n1 = parseFloat(datosNotas.nota1) || 0;
     const n2 = parseFloat(datosNotas.nota2) || 0;
@@ -228,7 +201,7 @@ function mostrarDatosEstudiante(nombreBuscar) {
     }
   }
 
-  // 2. Mostrar Asistencia
+  // Mostrar Asistencia
   if (datosAsist && contenedorAsistenciaAlumno) {
     const porcentaje =
       datosAsist.totales > 0 ? Math.round((datosAsist.asistidas / datosAsist.totales) * 100) : 0;
