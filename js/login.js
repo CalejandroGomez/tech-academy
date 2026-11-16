@@ -5,63 +5,39 @@ const inputContrasena = document.getElementById("contrasena");
 const mensajeLogin = document.getElementById("mensajeLogin");
 const botonLogin = document.querySelector(".boton-login");
 
-// Los 5 estudiantes por defecto del curso
-const estudiantesBase = [
-  {
-    nombre: "Mariana Gómez",
-    usuario: "mariana",
-    documento: "1001",
-    correo: "mariana@techacademy.edu",
-    telefono: "3001112233",
-    contrasena: "1234",
-    rol: "aprendiz"
-  },
-  {
-    nombre: "Carlos Restrepo",
-    usuario: "carlos",
-    documento: "1002",
-    correo: "carlos@techacademy.edu",
-    telefono: "3002223344",
-    contrasena: "1234",
-    rol: "aprendiz"
-  },
-  {
-    nombre: "Luisa Fernández",
-    usuario: "luisa",
-    documento: "1003",
-    correo: "luisa@techacademy.edu",
-    telefono: "3003334455",
-    contrasena: "1234",
-    rol: "aprendiz"
-  },
-  {
-    nombre: "Sebastián Ramírez",
-    usuario: "sebastian",
-    documento: "1004",
-    correo: "sebastian@techacademy.edu",
-    telefono: "3004445566",
-    contrasena: "1234",
-    rol: "aprendiz"
-  },
-  {
-    nombre: "Juan Camilo Montoya",
-    usuario: "juan",
-    documento: "1005",
-    correo: "juan@techacademy.edu",
-    telefono: "3005556677",
-    contrasena: "1234",
-    rol: "aprendiz"
+
+// FETCH
+async function cargarUsuarios() {
+  try {
+    // llamar alumnos
+    const respuestaAlumnos = await fetch("alumnos.json");
+    const alumnos = await respuestaAlumnos.json();
+    console.log("Los alumnos recuperados del .json son: ", alumnos);
+    // llamar docentes
+    const respuestaDocentes = await fetch("docentes.json");
+    const docentes = await respuestaDocentes.json();
+    console.log("Los docentes recuperados del .json son: ", docentes);
+    // Guardar en el local storage
+    if (!localStorage.getItem("usuarios")) {
+      localStorage.setItem("usuarios", JSON.stringify(alumnos));
+    }
+    if (!localStorage.getItem("docentes")) {
+      localStorage.setItem("docentes", JSON.stringify(docentes));
+    }
+    if (!localStorage.getItem("calificaciones_academicas")) {
+      localStorage.setItem("calificaciones_academicas", JSON.stringify(alumnos));
+    }
+    if (!localStorage.getItem("asistencias_academicas")) {
+      localStorage.setItem("asistencias_academicas", JSON.stringify(alumnos));
+    }
+  } catch (error) {
+    console.error(error);
   }
-];
-
-// Cargar usuarios desde localStorage o guardar los 5 estudiantes por defecto
-let usuariosRegistrados = JSON.parse(localStorage.getItem("usuarios"));
-if (!usuariosRegistrados) {
-  usuariosRegistrados = estudiantesBase;
-  localStorage.setItem("usuarios", JSON.stringify(usuariosRegistrados));
 }
+cargarUsuarios();
 
-// Validar credenciales al enviar el formulario
+
+// Validar datos al enviar el formulario
 if (formulario) {
   formulario.addEventListener("submit", function (evento) {
     evento.preventDefault();
@@ -76,11 +52,24 @@ if (formulario) {
 
     const userMin = user.toLowerCase();
 
-    // 1. Docente o Admin -> acceso al panel del profesor (dashBoardProfesor.html)
-    if ((userMin === "admin" && pass === "123") || (userMin === "docente" && pass === "1234")) {
+    // Buscar en la lista de docentes guardada en localStorage
+    const docentesRegistrados = JSON.parse(localStorage.getItem("docentes")) || [];
+    let docenteEncontrado = null;
+
+    for (let d of docentesRegistrados) {
+      const coincideUsuario = d.usuario && d.usuario.toLowerCase() === userMin;
+      const coincideCorreo = d.correo && d.correo.toLowerCase() === userMin;
+
+      if ((coincideUsuario || coincideCorreo) && d.contrasena === pass) {
+        docenteEncontrado = d;
+        break;
+      }
+    }
+
+    if (docenteEncontrado) {
       const docenteActivo = {
-        nombre: userMin === "docente" ? "Profesor Diego" : "Administrador",
-        usuario: userMin,
+        nombre: docenteEncontrado.nombre,
+        usuario: docenteEncontrado.usuario,
         rol: "docente"
       };
       localStorage.setItem("usuarioActivo", JSON.stringify(docenteActivo));
@@ -91,8 +80,8 @@ if (formulario) {
       return;
     }
 
-    // 2. Buscar coincidencia en la lista de estudiantes
-    usuariosRegistrados = JSON.parse(localStorage.getItem("usuarios")) || estudiantesBase;
+    // Buscar en la lista de estudiantes guardada en localStorage
+    const usuariosRegistrados = JSON.parse(localStorage.getItem("usuarios")) || [];
     let estudianteEncontrado = null;
 
     for (let u of usuariosRegistrados) {
@@ -120,13 +109,12 @@ if (formulario) {
         "dashBoardAlumno.html"
       );
     } else {
-      // 3. Error en credenciales
       mostrarMensaje("Usuario o contraseña incorrectos.", "error");
     }
   });
 }
 
-// Mostrar mensaje de éxito y esperar antes de redirigir (como en ejemploLocalStorage)
+// Mostrar mensaje de acceso y redirigir después de una espera
 function iniciarSesionConEspera(texto, urlDestino) {
   mostrarMensaje("Verificando credenciales...", "exito");
 
@@ -144,19 +132,10 @@ function iniciarSesionConEspera(texto, urlDestino) {
   }, 2200);
 }
 
-// Mostrar mensaje en pantalla (error o éxito)
+// Mostrar mensaje de error o confirmación en pantalla`
 function mostrarMensaje(texto, tipo) {
   if (!mensajeLogin) return;
 
   mensajeLogin.textContent = texto;
-  mensajeLogin.style.fontWeight = "bold";
-  mensajeLogin.style.opacity = "1";
-
-  if (tipo === "exito") {
-    mensajeLogin.className = "mensaje-login exito";
-    mensajeLogin.style.color = "#1b4d20";
-  } else {
-    mensajeLogin.className = "mensaje-login error";
-    mensajeLogin.style.color = "#8b0000";
-  }
+  mensajeLogin.setAttribute("class", "mensaje-login " + tipo);
 }

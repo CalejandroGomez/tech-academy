@@ -7,6 +7,7 @@
   <title>Dashboard Alumno - Tech Academy</title>
   <link rel="stylesheet" href="css/styles.css" />
   <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet" />
+  <script src="js/dashBoardAlumno.js" defer></script>
 </head>
 
 <body class="pagina-seguimiento">
@@ -59,19 +60,6 @@
           <p id="alumno-detalle-sesiones">0 de 0 sesiones</p>
         </div>
       </section>
-
-      <!-- Pestañas de navegación del alumno -->
-      <div class="barra-herramientas-panel">
-        <div class="pestanas-modulos">
-          <button type="button" class="btn-pestana activa" id="tab-alumno-notas">Mis Calificaciones</button>
-          <button type="button" class="btn-pestana" id="tab-alumno-asistencia">Mi Asistencia</button>
-          <button type="button" class="btn-pestana" id="tab-alumno-todo">Ver Ambos</button>
-        </div>
-      </div>
-
-      <!-- ========================================================
-           SECCIÓN 1: MIS CALIFICACIONES (Solo lectura)
-           ======================================================== -->
       <div id="seccion-alumno-notas" class="bloque-modulo">
         <div class="tarjeta-modulo">
           <h3>Detalle de Mis Calificaciones</h3>
@@ -91,15 +79,12 @@
           <div id="contenedor-notas-alumno"></div>
         </section>
       </div>
-
-      <!-- ========================================================
-           SECCIÓN 2: MI HISTORIAL DE ASISTENCIA (Solo lectura)
-           ======================================================== -->
-      <div id="seccion-alumno-asistencia" class="bloque-modulo" style="display: none;">
+      <div id="seccion-alumno-asistencia" class="bloque-modulo">
         <div class="tarjeta-modulo">
           <h3>Reporte de Mi Asistencia</h3>
           <p class="descripcion-modulo">
-            Recuerda que para aprobar el módulo en Tech Academy se requiere un mínimo de <strong>75%</strong> de asistencia.
+            Recuerda que para aprobar el módulo en Tech Academy se requiere un mínimo de <strong>75%</strong> de
+            asistencia.
           </p>
         </div>
 
@@ -118,8 +103,6 @@
 
     </section>
   </main>
-
-  <script src="js/dashBoardAlumno.js"></script>
 </body>
 
 </html>

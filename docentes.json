@@ -1,0 +1,11 @@
+[
+  {
+    "id": 1,
+    "nombre": "Profesor Diego",
+    "usuario": "docente",
+    "documento": "2001",
+    "correo": "dgiraldoza@cesde.net",
+    "contrasena": "1234",
+    "rol": "docente"
+  }
+]

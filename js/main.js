@@ -42,7 +42,7 @@ const tarjetas = document.querySelectorAll(".card");
 
 
 
-// Asignar evento click a cada tarjeta de programa
+// Asignar evento a cada tarjeta de programa
 for (let tarjeta of tarjetas) {
   tarjeta.addEventListener("click", function () {
     const idSeleccionado = Number(tarjeta.getAttribute("data-id"));

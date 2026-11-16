@@ -1,293 +1,161 @@
-// Referencias del encabezado del aprendiz
+// Elementos del encabezado y los indicadores del aprendiz
 const saludoAlumno = document.getElementById("saludo-alumno");
 const btnSalirAlumno = document.getElementById("btn-salir-alumno");
 const nombreExpediente = document.getElementById("nombre-expediente");
 
-// Referencias de los indicadores (KPIs personales)
 const alumnoPromedio = document.getElementById("alumno-promedio");
 const alumnoConceptoNota = document.getElementById("alumno-concepto-nota");
 const alumnoEstadoEntrega = document.getElementById("alumno-estado-entrega");
 const alumnoPorcentajeAsistencia = document.getElementById("alumno-porcentaje-asistencia");
 const alumnoDetalleSesiones = document.getElementById("alumno-detalle-sesiones");
 
-// Referencias de contenedores de tablas
 const contenedorNotasAlumno = document.getElementById("contenedor-notas-alumno");
 const contenedorAsistenciaAlumno = document.getElementById("contenedor-asistencia-alumno");
 
-// Referencias de pestañas de vista
-const tabAlumnoNotas = document.getElementById("tab-alumno-notas");
-const tabAlumnoAsistencia = document.getElementById("tab-alumno-asistencia");
-const tabAlumnoTodo = document.getElementById("tab-alumno-todo");
-
-const seccionAlumnoNotas = document.getElementById("seccion-alumno-notas");
-const seccionAlumnoAsistencia = document.getElementById("seccion-alumno-asistencia");
-
-// Los 5 estudiantes por defecto (mismos que en dashBoardProfesor.js)
-const calificacionesPorDefecto = [
-  { nombre: "Mariana Gómez", estado: "Entregado", nota1: "4.6", nota2: "4.4", nota3: "4.5" },
-  { nombre: "Carlos Restrepo", estado: "En revisión", nota1: "3.8", nota2: "3.6", nota3: "4.0" },
-  { nombre: "Luisa Fernández", estado: "Pendiente", nota1: "2.5", nota2: "2.8", nota3: "2.2" },
-  { nombre: "Sebastián Ramírez", estado: "Entregado", nota1: "4.2", nota2: "4.5", nota3: "4.8" },
-  { nombre: "Juan Camilo Montoya", estado: "Entregado", nota1: "4.2", nota2: "4.0", nota3: "4.4" }
-];
-
-const asistenciasPorDefecto = [
-  { nombre: "Mariana Gómez", fecha: "2026-11-08", presenteHoy: true, asistidas: 19, totales: 20 },
-  { nombre: "Carlos Restrepo", fecha: "2026-11-08", presenteHoy: true, asistidas: 17, totales: 20 },
-  { nombre: "Luisa Fernández", fecha: "2026-11-08", presenteHoy: false, asistidas: 14, totales: 20 },
-  { nombre: "Sebastián Ramírez", fecha: "2026-11-08", presenteHoy: true, asistidas: 18, totales: 20 },
-  { nombre: "Juan Camilo Montoya", fecha: "2026-11-08", presenteHoy: true, asistidas: 16, totales: 20 }
-];
-
-// Cargar listas desde localStorage o usar las listas por defecto
+// Listas de calificaciones y asistencia
 let listaCalificaciones =
-  JSON.parse(localStorage.getItem("calificaciones_academicas")) || calificacionesPorDefecto;
+  JSON.parse(localStorage.getItem("calificaciones_academicas")) || [];
 
 let listaAsistencias =
-  JSON.parse(localStorage.getItem("asistencias_academicas")) || asistenciasPorDefecto;
+  JSON.parse(localStorage.getItem("asistencias_academicas")) || [];
 
-// Obtener el aprendiz que inició sesión
+// Aprendiz que inició sesión
 let usuarioGuardado = JSON.parse(localStorage.getItem("usuarioActivo"));
 if (!usuarioGuardado || usuarioGuardado.rol !== "aprendiz") {
-  usuarioGuardado = {
-    nombre: "Mariana Gómez",
-    rol: "aprendiz"
-  };
+  usuarioGuardado = { nombre: "Usuario", rol: "aprendiz" };
 }
 
 const estudianteActivo = usuarioGuardado.nombre;
+saludoAlumno.textContent = estudianteActivo;
+nombreExpediente.textContent = estudianteActivo;
 
-// Asegurar que el aprendiz activo exista en las listas si se acaba de registrar
-function asegurarEstudianteEnListas(nombreEst) {
-  let existeNota = false;
-  for (let item of listaCalificaciones) {
-    if (item.nombre.toLowerCase() === nombreEst.toLowerCase()) {
-      existeNota = true;
-      break;
-    }
-  }
-  if (!existeNota) {
-    listaCalificaciones.push({
-      nombre: nombreEst,
-      estado: "Pendiente",
-      nota1: "0.0",
-      nota2: "0.0",
-      nota3: "0.0"
-    });
-    localStorage.setItem("calificaciones_academicas", JSON.stringify(listaCalificaciones));
-  }
+let datosNotas = null;
+let datosAsist = null;
 
-  let existeAsist = false;
-  for (let item of listaAsistencias) {
-    if (item.nombre.toLowerCase() === nombreEst.toLowerCase()) {
-      existeAsist = true;
-      break;
+// FETCH
+async function cargarUsuarios() {
+  try {
+    const respuesta = await fetch("alumnos.json");
+    const alumnos = await respuesta.json();
+    console.log("Los alumnos recuperados del .json son: ", alumnos);
+    if (listaCalificaciones.length === 0) {
+      listaCalificaciones = alumnos;
+      localStorage.setItem("calificaciones_academicas", JSON.stringify(listaCalificaciones));
     }
-  }
-  if (!existeAsist) {
-    listaAsistencias.push({
-      nombre: nombreEst,
-      fecha: "2026-11-08",
-      presenteHoy: true,
-      asistidas: 1,
-      totales: 1
-    });
-    localStorage.setItem("asistencias_academicas", JSON.stringify(listaAsistencias));
+    if (listaAsistencias.length === 0) {
+      listaAsistencias = alumnos;
+      localStorage.setItem("asistencias_academicas", JSON.stringify(listaAsistencias));
+    }
+    // Buscar las notas del aprendiz activo
+    for (let item of listaCalificaciones) {
+      if (item.nombre.toLowerCase() === estudianteActivo.toLowerCase()) {
+        datosNotas = item;
+        break;
+      }
+    }
+    // Buscar la asistencia del aprendiz activo
+    for (let item of listaAsistencias) {
+      if (item.nombre.toLowerCase() === estudianteActivo.toLowerCase()) {
+        datosAsist = item;
+        break;
+      }
+    }
+    mostrarCalificaciones();
+    mostrarAsistencia();
+  } catch (error) {
+    console.error(error);
   }
 }
+cargarUsuarios();
 
-// Renderizar únicamente las calificaciones y asistencia del estudiante que inició sesión
-function mostrarDatosEstudiante(nombreBuscar) {
-  if (saludoAlumno) {
-    saludoAlumno.textContent = nombreBuscar;
-  }
-  if (nombreExpediente) {
-    nombreExpediente.textContent = nombreBuscar;
-  }
+// Mostrar calificaciones y promedio del aprendiz activo
+function mostrarCalificaciones() {
+  const n1 = parseFloat(datosNotas.nota1) || 0;
+  const n2 = parseFloat(datosNotas.nota2) || 0;
+  const n3 = parseFloat(datosNotas.nota3) || 0;
+  const promedio = ((n1 + n2 + n3) / 3).toFixed(1);
 
-  let datosNotas = null;
-  for (let item of listaCalificaciones) {
-    if (item.nombre.toLowerCase() === nombreBuscar.toLowerCase()) {
-      datosNotas = item;
-      break;
-    }
-  }
+  alumnoPromedio.textContent = promedio;
+  alumnoPromedio.setAttribute(
+    "class",
+    parseFloat(promedio) >= 3.0 ? "estado-aprobado" : "estado-pendiente"
+  );
+  alumnoConceptoNota.textContent =
+    parseFloat(promedio) >= 3.0 ? "Estado: Aprobando" : "Estado: Por mejorar";
 
-  let datosAsist = null;
-  for (let item of listaAsistencias) {
-    if (item.nombre.toLowerCase() === nombreBuscar.toLowerCase()) {
-      datosAsist = item;
-      break;
-    }
-  }
-
-  // Mostrar Calificaciones (Momento 1, Momento 2, Momento 3 y Promedio Definitivo)
-  if (datosNotas && contenedorNotasAlumno) {
-    const n1 = parseFloat(datosNotas.nota1) || 0;
-    const n2 = parseFloat(datosNotas.nota2) || 0;
-    const n3 = parseFloat(datosNotas.nota3) || 0;
-    const promedio = ((n1 + n2 + n3) / 3).toFixed(1);
-
-    if (alumnoPromedio) {
-      alumnoPromedio.textContent = promedio;
-      alumnoPromedio.style.color = parseFloat(promedio) >= 3.0 ? "#1b4d20" : "#8b0000";
-    }
-    if (alumnoConceptoNota) {
-      alumnoConceptoNota.textContent =
-        parseFloat(promedio) >= 3.0 ? "Estado: Aprobando" : "Estado: Por mejorar";
-    }
-    if (alumnoEstadoEntrega) {
-      alumnoEstadoEntrega.textContent = datosNotas.estado;
-      if (datosNotas.estado === "Entregado") {
-        alumnoEstadoEntrega.style.color = "#1b4d20";
-      } else if (datosNotas.estado === "Pendiente") {
-        alumnoEstadoEntrega.style.color = "#8b0000";
-      } else {
-        alumnoEstadoEntrega.style.color = "#7a5200";
-      }
-    }
-
-    const momentos = [
-      { titulo: "Momento 1", nota: n1.toFixed(1), estado: datosNotas.estado },
-      { titulo: "Momento 2", nota: n2.toFixed(1), estado: datosNotas.estado },
-      { titulo: "Momento 3", nota: n3.toFixed(1), estado: datosNotas.estado },
-      { titulo: "PROMEDIO DEFINITIVO", nota: promedio, estado: datosNotas.estado, esFinal: true }
-    ];
-
-    contenedorNotasAlumno.innerHTML = "";
-
-    for (let m of momentos) {
-      const fila = document.createElement("div");
-      fila.classList.add("fila", "fila-alumno-notas");
-      if (m.esFinal) {
-        fila.style.fontWeight = "bold";
-        fila.style.backgroundColor = "rgba(174, 127, 55, 0.2)";
-      }
-
-      const colMomento = document.createElement("span");
-      colMomento.textContent = m.titulo;
-
-      const colEstado = document.createElement("span");
-      colEstado.textContent = m.estado;
-
-      const colNota = document.createElement("span");
-      colNota.textContent = m.nota;
-      colNota.style.fontWeight = "bold";
-
-      const colValoracion = document.createElement("span");
-      const valorNum = parseFloat(m.nota);
-      if (valorNum >= 3.0) {
-        colValoracion.textContent = "Aprobado";
-        colValoracion.style.color = "#1b4d20";
-        colNota.style.color = "#1b4d20";
-      } else {
-        colValoracion.textContent = "Pendiente / Bajo";
-        colValoracion.style.color = "#8b0000";
-        colNota.style.color = "#8b0000";
-      }
-      colValoracion.style.fontWeight = "bold";
-
-      fila.appendChild(colMomento);
-      fila.appendChild(colEstado);
-      fila.appendChild(colNota);
-      fila.appendChild(colValoracion);
-
-      contenedorNotasAlumno.appendChild(fila);
-    }
-  }
-
-  // Mostrar Asistencia
-  if (datosAsist && contenedorAsistenciaAlumno) {
-    const porcentaje =
-      datosAsist.totales > 0 ? Math.round((datosAsist.asistidas / datosAsist.totales) * 100) : 0;
-
-    if (alumnoPorcentajeAsistencia) {
-      alumnoPorcentajeAsistencia.textContent = `${porcentaje}%`;
-      alumnoPorcentajeAsistencia.style.color = porcentaje >= 75 ? "#1b4d20" : "#8b0000";
-    }
-    if (alumnoDetalleSesiones) {
-      alumnoDetalleSesiones.textContent = `${datosAsist.asistidas} de ${datosAsist.totales} sesiones`;
-    }
-
-    contenedorAsistenciaAlumno.innerHTML = "";
-
-    const filaAsist = document.createElement("div");
-    filaAsist.classList.add("fila", "fila-alumno-asistencia");
-
-    const colFecha = document.createElement("span");
-    colFecha.textContent = datosAsist.fecha;
-
-    const colEstadoHoy = document.createElement("span");
-    colEstadoHoy.textContent = datosAsist.presenteHoy ? "Presente" : "Ausente";
-    colEstadoHoy.style.fontWeight = "bold";
-    colEstadoHoy.style.color = datosAsist.presenteHoy ? "#1b4d20" : "#8b0000";
-
-    const colAsistidas = document.createElement("span");
-    colAsistidas.textContent = `${datosAsist.asistidas} clases`;
-
-    const colTotales = document.createElement("span");
-    colTotales.textContent = `${datosAsist.totales} sesiones`;
-
-    const colPorcentaje = document.createElement("span");
-    colPorcentaje.textContent = `${porcentaje}% (${porcentaje >= 75 ? "Al día" : "Riesgo por inasistencia"})`;
-    colPorcentaje.style.fontWeight = "bold";
-    colPorcentaje.style.color = porcentaje >= 75 ? "#1b4d20" : "#8b0000";
-
-    filaAsist.appendChild(colFecha);
-    filaAsist.appendChild(colEstadoHoy);
-    filaAsist.appendChild(colAsistidas);
-    filaAsist.appendChild(colTotales);
-    filaAsist.appendChild(colPorcentaje);
-
-    contenedorAsistenciaAlumno.appendChild(filaAsist);
-  }
-}
-
-// ============================================================
-// EVENTOS DE PESTAÑAS Y SALIDA
-// ============================================================
-function cambiarPestanaAlumno(modo) {
-  tabAlumnoNotas.classList.remove("activa");
-  tabAlumnoAsistencia.classList.remove("activa");
-  tabAlumnoTodo.classList.remove("activa");
-
-  if (modo === "notas") {
-    tabAlumnoNotas.classList.add("activa");
-    seccionAlumnoNotas.style.display = "block";
-    seccionAlumnoAsistencia.style.display = "none";
-  } else if (modo === "asistencia") {
-    tabAlumnoAsistencia.classList.add("activa");
-    seccionAlumnoNotas.style.display = "none";
-    seccionAlumnoAsistencia.style.display = "block";
+  alumnoEstadoEntrega.textContent = datosNotas.estado;
+  if (datosNotas.estado === "Entregado") {
+    alumnoEstadoEntrega.setAttribute("class", "texto-indicador-mediano estado-aprobado");
+  } else if (datosNotas.estado === "Pendiente") {
+    alumnoEstadoEntrega.setAttribute("class", "texto-indicador-mediano estado-pendiente");
   } else {
-    tabAlumnoTodo.classList.add("activa");
-    seccionAlumnoNotas.style.display = "block";
-    seccionAlumnoAsistencia.style.display = "block";
+    alumnoEstadoEntrega.setAttribute("class", "texto-indicador-mediano estado-revision");
+  }
+
+  const momentos = [
+    { titulo: "Momento 1", nota: n1.toFixed(1) },
+    { titulo: "Momento 2", nota: n2.toFixed(1) },
+    { titulo: "Momento 3", nota: n3.toFixed(1) },
+    { titulo: "PROMEDIO DEFINITIVO", nota: promedio, esFinal: true }
+  ];
+
+  contenedorNotasAlumno.innerHTML = "";
+
+  for (let m of momentos) {
+    const aprobado = parseFloat(m.nota) >= 3.0;
+    const claseNota = aprobado ? "estado-aprobado" : "estado-pendiente";
+    const textoValoracion = aprobado ? "Aprobado" : "Pendiente / Bajo";
+
+    const fila = document.createElement("div");
+    fila.classList.add("fila", "fila-alumno-notas");
+    if (m.esFinal) {
+      fila.classList.add("fila-definitiva");
+    }
+
+    fila.innerHTML = `
+      <span>${m.titulo}</span>
+      <span>${datosNotas.estado}</span>
+      <span class="${claseNota}">${m.nota}</span>
+      <span class="${claseNota}">${textoValoracion}</span>
+    `;
+
+    contenedorNotasAlumno.appendChild(fila);
   }
 }
 
-if (tabAlumnoNotas) {
-  tabAlumnoNotas.addEventListener("click", function () {
-    cambiarPestanaAlumno("notas");
-  });
-}
-if (tabAlumnoAsistencia) {
-  tabAlumnoAsistencia.addEventListener("click", function () {
-    cambiarPestanaAlumno("asistencia");
-  });
-}
-if (tabAlumnoTodo) {
-  tabAlumnoTodo.addEventListener("click", function () {
-    cambiarPestanaAlumno("todo");
-  });
+// Mostrar historial de asistencia del aprendiz
+function mostrarAsistencia() {
+  const porcentaje =
+    datosAsist.totales > 0 ? parseInt((datosAsist.asistidas / datosAsist.totales) * 100) : 0;
+
+  const alDia = porcentaje >= 75;
+  const claseAsist = alDia ? "estado-aprobado" : "estado-pendiente";
+
+  alumnoPorcentajeAsistencia.textContent = `${porcentaje}%`;
+  alumnoPorcentajeAsistencia.setAttribute("class", claseAsist);
+  alumnoDetalleSesiones.textContent = `${datosAsist.asistidas} de ${datosAsist.totales} sesiones`;
+
+  const textoHoy = datosAsist.presenteHoy ? "Presente" : "Ausente";
+  const claseHoy = datosAsist.presenteHoy ? "estado-aprobado" : "estado-pendiente";
+  const textoPorcentaje = alDia
+    ? `${porcentaje}% (Al día)`
+    : `${porcentaje}% (Riesgo por inasistencia)`;
+
+  contenedorAsistenciaAlumno.innerHTML = "";
+
+  const fila = document.createElement("div");
+  fila.classList.add("fila", "fila-alumno-asistencia");
+  fila.innerHTML = `
+    <span>${datosAsist.fecha}</span>
+    <span class="${claseHoy}">${textoHoy}</span>
+    <span>${datosAsist.asistidas} clases</span>
+    <span>${datosAsist.totales} sesiones</span>
+    <span class="${claseAsist}">${textoPorcentaje}</span>
+  `;
+
+  contenedorAsistenciaAlumno.appendChild(fila);
 }
 
-if (btnSalirAlumno) {
-  btnSalirAlumno.addEventListener("click", function () {
-    localStorage.removeItem("usuarioActivo");
-  });
-}
-
-// Inicializar vista del alumno
-asegurarEstudianteEnListas(estudianteActivo);
-mostrarDatosEstudiante(estudianteActivo);
+btnSalirAlumno.addEventListener("click", function () {
+  localStorage.removeItem("usuarioActivo");
+});

@@ -2,7 +2,7 @@
 
 Plataforma web educativa desarrollada en **FrontEnd 1 - CESDE (2026-2)**.
 
-El proyecto es un MVP funcional que aplica manipulación del DOM, captura de eventos, arreglos de objetos, temporizadores (`setTimeout`), contadores dinámicos, listas con checkboxes y persistencia con `localStorage`, tal como se vio en clase con el docente Diego Giraldo Zapata.
+El proyecto es un MVP funcional que aplica carga asíncrona de datos desde archivos `.json` con `fetch()` (`async/await`), manipulación del DOM, captura de eventos, arreglos de objetos, temporizadores (`setTimeout`), contadores dinámicos, listas con checkboxes y persistencia con `localStorage`, tal como se vio en clase con el docente Diego Giraldo Zapata.
 
 ---
 
@@ -22,10 +22,10 @@ El proyecto es un MVP funcional que aplica manipulación del DOM, captura de eve
 
 - **HTML5** — estructura semántica
 - **CSS3** — Flexbox, Grid, variables CSS, transiciones (hoja de estilos unificada en `css/styles.css`)
-- **JavaScript Vanilla** — DOM, eventos, arreglos de objetos, `setTimeout`, `localStorage`
+- **JavaScript Vanilla** — `fetch()` (`async/await`), JSON, DOM, eventos, arreglos de objetos, `setTimeout`, `localStorage`
 - Tipografía: `Special Elite` (Google Fonts)
 
-No se usaron frameworks ni librerías externas. Todo el código JavaScript sigue los conceptos vistos en las sesiones del curso (`todo`, `Contador` y `ejemploLocalStorage`).
+No se usaron frameworks ni librerías externas. Todo el código JavaScript sigue los conceptos vistos en las sesiones del curso (`todo`, `Contador`, `ejemploLocalStorage` y `proyectoFetch`).
 
 ---
 
@@ -33,8 +33,7 @@ No se usaron frameworks ni librerías externas. Todo el código JavaScript sigue
 
 | Rol | Usuario (o Documento) | Contraseña | Destino |
 |---|---|---|---|
-| Docente | `docente` | `1234` | `dashBoardProfesor.html` |
-| Admin | `admin` | `123` | `dashBoardProfesor.html` |
+| Docente (Profesor Diego) | `docente` | `1234` | `dashBoardProfesor.html` |
 | Estudiante 1 (Mariana Gómez) | `mariana` (o `1001`) | `1234` | `dashBoardAlumno.html` |
 | Estudiante 2 (Carlos Restrepo) | `carlos` (o `1002`) | `1234` | `dashBoardAlumno.html` |
 | Estudiante 3 (Luisa Fernández) | `luisa` (o `1003`) | `1234` | `dashBoardAlumno.html` |
@@ -53,15 +52,17 @@ tech-academy/
 │   ├── main.js                 # Lógica e interacción del catálogo en la página principal
 │   ├── login.js                # Validación de credenciales, espera con setTimeout y redirección
 │   ├── registro.js             # Captura de datos y registro sincronizado con localStorage
-│   ├── dashBoardProfesor.js    # Gestión separada de calificaciones, asistencias por sesión y KPIs
-│   └── dashBoardAlumno.js      # Consulta de notas, asistencia y lista de compromisos (To-Do)
+│   ├── dashBoardProfesor.js    # Gestión de calificaciones, asistencias por sesión e indicadores
+│   └── dashBoardAlumno.js      # Consulta de notas y asistencia del estudiante activo
 ├── Images/                     # Imágenes, fondos, iconos y personajes
 ├── mockup/                     # Capturas de referencia visual del diseño
 ├── .gitignore                  # Excluye carpetas locales y archivos privados
+├── alumnos.json                # Datos iniciales de los 5 aprendices (consumidos con fetch)
+├── docentes.json               # Datos iniciales del docente (consumidos con fetch)
 ├── index.html                  # Página de inicio con catálogo interactivo
 ├── login.html                  # Pantalla de inicio de sesión
 ├── registro.html               # Formulario de registro de aprendices
-├── dashBoardProfesor.html      # Panel académico del profesor (Notas y Asistencia separadas)
+├── dashBoardProfesor.html      # Panel académico del profesor (Notas y Asistencia)
 ├── dashBoardAlumno.html        # Panel académico del estudiante
 └── README.md                   # Documentación del proyecto
 ```

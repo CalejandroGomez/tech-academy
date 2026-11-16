@@ -7,6 +7,7 @@
   <title>Dashboard Profesor - Tech Academy</title>
   <link rel="stylesheet" href="css/styles.css" />
   <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet" />
+  <script src="js/dashBoardProfesor.js" defer></script>
 </head>
 
 <body class="pagina-seguimiento">
@@ -67,23 +68,14 @@
         </div>
       </section>
 
-      <!-- Barra de herramientas: Buscador y Pestañas de módulos -->
+      <!-- Buscador de estudiantes -->
       <div class="barra-herramientas-panel">
         <div class="buscador-seguimiento">
           <label for="buscar">Buscar</label>
           <input type="text" id="buscar" placeholder="Nombre del estudiante..." />
         </div>
-
-        <div class="pestanas-modulos">
-          <button type="button" class="btn-pestana activa" id="tab-calificaciones">Calificaciones y Entregas</button>
-          <button type="button" class="btn-pestana" id="tab-asistencia">Asistencia por Sesión</button>
-          <button type="button" class="btn-pestana" id="tab-ambos">Ver Ambos</button>
-        </div>
       </div>
 
-      <!-- ========================================================
-           MÓDULO 1: REGISTRO DE CALIFICACIONES Y ENTREGAS
-           ======================================================== -->
       <div id="modulo-calificaciones" class="bloque-modulo">
         <div class="formulario-registro tarjeta-modulo">
           <h3>Registro de Calificaciones y Entregas</h3>
@@ -120,12 +112,8 @@
 
           <div id="contenedor-estudiantes"></div>
         </section>
-      </div>
-
-      <!-- ========================================================
-           MÓDULO 2: CONTROL DE ASISTENCIA POR SESIÓN
-           ======================================================== -->
-      <div id="modulo-asistencia" class="bloque-modulo" style="display: none;">
+      </div>  
+      <div id="modulo-asistencia" class="bloque-modulo">
         <div class="formulario-registro tarjeta-modulo">
           <div class="cabecera-asistencia">
             <h3>Control de Asistencia por Sesión</h3>
@@ -134,21 +122,6 @@
               <span>Ausentes: <strong id="contador-ausentes">0</strong></span>
             </div>
           </div>
-
-          <form id="form-asistencia" class="form-en-linea">
-            <label for="fecha-sesion" class="etiqueta-inline">Fecha de sesión:</label>
-            <input type="date" id="fecha-sesion" value="2026-11-08" required />
-
-            <input type="text" id="nombre-asistencia" placeholder="Agregar estudiante a lista..." />
-
-            <select id="estado-asistencia-inicial">
-              <option value="presente">Presente</option>
-              <option value="ausente">Ausente</option>
-            </select>
-
-            <button type="submit" class="btn-añadir" id="btn-submit-asistencia">Agregar / Actualizar Fecha</button>
-            <button type="button" class="btn-editar" id="btn-nueva-sesion">+ Nueva Sesión Grupal</button>
-          </form>
         </div>
 
         <section class="tabla-seguimiento">
@@ -172,9 +145,6 @@
 
     </section>
   </main>
-
-  <script src="js/dashBoardProfesor.js"></script>
 </body>
 
 </html>
-
